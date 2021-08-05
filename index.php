@@ -29,18 +29,22 @@ foreach ($defaults as $k => $v) {
 // Info message(s)
 Hook::set('layout', function() {
     extract($GLOBALS);
-    if (!$site->is('error')) {
-        if ($site->is('archives')) {
-            $chops = explode('/', $url->path);
-            $v = explode('-', array_pop($chops));
-            $v = $archive->i((1 === count($v) ? "" : '%B ') . '%Y');
-            Alert::info('Showing %s published in %s.', ['posts', '<em>' . $v . '</em>']);
-        }
-        if ($site->is('search') && $v = Get::get($state->x->search->key ?? 'q')) {
-            Alert::info('Showing %s matched with query %s.', ['posts', '<em>' . $v . '</em>']);
-        }
-        if ($site->is('tags')) {
-            Alert::info('Showing %s tagged in %s.', ['posts', '<em>' . $tag->title . '</em>']);
-        }
+    if (false !== strpos($url->path, '/::')) {
+        return; // Maybe in Panel?
+    }
+    if ($site->is('error')) {
+        return;
+    }
+    if ($site->is('archives')) {
+        $chops = explode('/', $url->path);
+        $v = explode('-', array_pop($chops));
+        $v = $archive->i((1 === count($v) ? "" : '%B ') . '%Y');
+        Alert::info('Showing %s published in %s.', ['posts', '<em>' . $v . '</em>']);
+    }
+    if ($site->is('search') && $v = Get::get($state->x->search->key ?? 'q')) {
+        Alert::info('Showing %s matched with query %s.', ['posts', '<em>' . $v . '</em>']);
+    }
+    if ($site->is('tags')) {
+        Alert::info('Showing %s tagged in %s.', ['posts', '<em>' . $tag->title . '</em>']);
     }
 });
