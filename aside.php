@@ -1,5 +1,6 @@
 <aside class="aside">
   <?= self::widget('form/search'); ?>
+  <?= self::widget('archive'); ?>
   <?= self::widget('tag'); ?>
   <?php if ($site->is('home')): ?>
     <?= self::widget('page/random'); ?>

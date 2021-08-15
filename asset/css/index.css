@@ -116,6 +116,27 @@ code, .code {
 
 details summary {
   font-family: var(--font-1);
+  display: block;
+  position: relative;
+  padding-left: 15px;
+}
+
+details summary::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-top: 4px solid transparent;
+  border-right: 0 solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 7px solid;
+  margin-top: -4px;
+}
+
+details[open] summary::before {
+  transform: rotate(90deg);
 }
 
 fieldset {
@@ -734,6 +755,18 @@ legend + .p {
 .widget a:focus,
 .widget a:hover {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAH0lEQVQImWNgQAIe0ZL/GXAB0iQ9oiX/48IUGItPEgDgWhaA/pnUkgAAAABJRU5ErkJggg==');
+}
+
+.widget .archive ul {
+  margin: 5px 0 0 15px;
+}
+
+.widget .archive + .archive {
+  margin-top: 10px;
+}
+
+.widget .archive[open] + .archive {
+  margin-top: 5px;
 }
 
 .widget .count {
