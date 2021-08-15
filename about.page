@@ -7,6 +7,7 @@ type: Markdown
 version: 1.0.0
 
 use:
+  '.\lot\x\archive': 1
   '.\lot\x\comment': 0
   '.\lot\x\feed': 0
   '.\lot\x\search': 1
