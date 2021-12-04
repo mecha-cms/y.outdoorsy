@@ -3,7 +3,7 @@
 $content = "";
 
 if (isset($state->x->search)) {
-    $to = $url . ($path ?? $state->pathBlog);
+    $to = $url . ($route ?? $state->routeBlog);
     $value = Get::get($key = $state->x->search->key ?? 'q');
     $content .= '<form action="' . $to . '" class="form-search" method="get">';
     $content .= '<p>';

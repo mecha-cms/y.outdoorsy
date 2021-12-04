@@ -4,9 +4,9 @@ $content = "";
 
 if (isset($state->x->archive)) {
     $archives = [];
-    $x_archive_path = $state->x->archive->path ?? '/archive';
-    $x_page_path = $path ?? $state->pathBlog;
-    foreach (g(LOT . DS . 'page' . $x_page_path, 'page') as $k => $v) {
+    $x_archive_route = $state->x->archive->route ?? '/archive';
+    $x_page_route = $route ?? $state->routeBlog;
+    foreach (g(LOT . D . 'page' . $x_page_route, 'page') as $k => $v) {
         $page = new Page($k);
         $v = $page->time;
         if ($v) {
@@ -39,7 +39,7 @@ if (isset($state->x->archive)) {
         }
         $content .= '<details class="archive' . (($open = $k === explode('-', $current)[0]) ? ' current' : "") . '"' . ($open ? ' open' : "") . '>';
         $content .= '<summary>';
-        $content .= '<a href="' . $url . $x_page_path . $x_archive_path . '/' . $k . '/1">';
+        $content .= '<a href="' . $url . $x_page_route . $x_archive_route . '/' . $k . '/1">';
         $content .= $k . ' <span class="count">' . count($v) . '</span>';
         $content .= '</a>';
         $content .= '</summary>';
@@ -48,7 +48,7 @@ if (isset($state->x->archive)) {
             $content .= '<ul>';
             foreach ($v as $kk => $vv) {
                 $content .= '<li' . ($k . '-' . $kk === $current ? ' class="current"' : "") . '>';
-                $content .= '<a href="' . $url . $x_page_path . $x_archive_path . '/' . $k . '-' . $kk . '/1">';
+                $content .= '<a href="' . $url . $x_page_route . $x_archive_route . '/' . $k . '-' . $kk . '/1">';
                 $content .= $k . ' ' . i($dates[((int) $kk) - 1]) . ' <span class="count">' . count($vv) . '</span>';
                 $content .= '</a>';
                 $content .= '</li>';

@@ -4,7 +4,7 @@ description: Two columns blog layout with old paper background.
 author: Taufik Nurrohman
 link: http://www.themespreview.com
 type: Markdown
-version: 1.0.0
+version: 2.0.0
 
 use:
   '.\lot\x\archive': 1

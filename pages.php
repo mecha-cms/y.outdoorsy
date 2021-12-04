@@ -23,7 +23,7 @@
     </header>
     <div>
       <?php if (!$excerpt = $page->excerpt): ?>
-        <?php $excerpt = '<p>' . To::excerpt($page->content, true, 200) . '</p>'; ?>
+        <?php $excerpt = '<p>' . To::description($page->content, 200) . '</p>'; ?>
       <?php endif; ?>
       <?= preg_replace('/<a(\s[^>]*?)?>|<\/a>/', "", $excerpt); ?>
       <p>
