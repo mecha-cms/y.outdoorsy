@@ -11,19 +11,20 @@ if (isset($state->x->sitemap)) {
 }
 
 if (isset($state->x->user)) {
-    $x_user_route = $state->x->user->route ?? '/user';
+    $route = $state->x->user->route ?? '/user';
     if (Is::user()) {
-        $metas[$url . $x_user_route . '/' . $user->name . $url->query('&', [
+        $metas[$url . $route . '/' . $user->name . $url->query([
             'exit' => $user->token,
             'kick' => $url->path
         ])] = 'Exit';
     } else {
-        $metas[$url . $x_user_route . $url->query('&', [
+        $metas[$url . $route . $url->query([
             'kick' => $url->path
         ])] = 'Enter';
     }
 }
 
+// Make sure that list is not empty so that the copyright line will not shift up coverring the hard-drawn horizontal rule
 !$metas && ($metas[$url . ""] = 'Home');
 
 if ($metas) {

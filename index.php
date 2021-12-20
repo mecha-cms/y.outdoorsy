@@ -1,7 +1,7 @@
 <?php
 
 $z = defined('TEST') && TEST ? '.' : '.min.';
-Asset::set(__DIR__ . D . 'asset' . D . 'css' . D . 'index' . $z . 'css', 20);
+Asset::set(__DIR__ . D . 'asset' . D . 'index' . $z . 'css', 20);
 
 $GLOBALS['links'] = new Anemone((static function($links, $state, $url) {
     $index = LOT . D . 'page' . D . trim(strtr($state->route, '/', D), D) . '.page';
