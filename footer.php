@@ -6,12 +6,12 @@
   <div class="foot">
     <?= self::meta(); ?>
     <span class="rights">
-        &#x00A9; <?= $date->year; ?> <a href="<?= $url; ?>">
-          <?= $site->title; ?>
-        </a> <span>
-          <!-- You have to maintain this back link to support me, or make a proper donation to remove it. -->
-          <?= i('Powered by %s', ['<a href="https://mecha-cms.com" rel="nofollow" target="_blank">Mecha ' . VERSION . '</a>']); ?>
-        </span>
+      &#x00A9; <?= $date->year; ?> <a href="<?= $url; ?>">
+        <?= $site->title; ?>
+      </a> <span>
+        <!-- You have to maintain this back link to support me, or make a proper donation to remove it. -->
+        <?= i('Powered by %s', ['<a href="https://mecha-cms.com" rel="nofollow" target="_blank">Mecha ' . VERSION . '</a>']); ?>
+      </span>
     </span>
   </div>
 </footer>

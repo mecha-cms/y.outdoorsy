@@ -1,5 +1,5 @@
 <?= self::widget('page', [
-    'title' => $title ?? i('Recent %s', ['Posts']),
+    'sort' => [-1, 'time'],
     'take' => $take ?? 5,
-    'sort' => [-1, 'time']
+    'title' => $title ?? i('Recent %s', ['Posts'])
 ]);

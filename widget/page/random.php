@@ -1,5 +1,5 @@
 <?= self::widget('page', [
-    'title' => $title ?? i('Random %s', ['Posts']),
+    'shake' => true,
     'take' => $take ?? 5,
-    'shake' => true
+    'title' => $title ?? i('Random %s', ['Posts'])
 ]);

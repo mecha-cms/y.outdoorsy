@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html class dir="<?= $site->direction; ?>" lang="<?= $site->language; ?>">
+<html class>
   <head>
-    <meta charset="<?= $site->charset; ?>">
+    <meta charset="utf-8">
     <meta content="width=1024" name="viewport">
     <?php if ($w = w($page->description ?? $site->description ?? "")): ?>
       <meta content="<?= $w; ?>" name="description">
@@ -15,7 +15,7 @@
       <?= w($t->reverse); ?>
     </title>
     <link href="<?= $url; ?>/favicon.ico" rel="icon">
-    <link href="<?= $url->clean; ?>" rel="canonical">
+    <link href="<?= $url->current(false, false); ?>" rel="canonical">
   </head>
   <body>
     <div class="body">

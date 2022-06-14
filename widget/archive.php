@@ -5,7 +5,7 @@ $content = "";
 if (isset($state->x->archive)) {
     $archives = [];
     $x_archive_route = $state->x->archive->route ?? '/archive';
-    $x_page_route = $route ?? $state->routeBlog;
+    $x_page_route = $path ?? $state->routeBlog;
     foreach (g(LOT . D . 'page' . $x_page_route, 'page') as $k => $v) {
         $page = new Page($k);
         $v = $page->time;
@@ -37,19 +37,19 @@ if (isset($state->x->archive)) {
         if (!isset($current)) {
             $current = $k;
         }
-        $content .= '<details class="archive' . (($open = $k === explode('-', $current)[0]) ? ' current' : "") . '"' . ($open ? ' open' : "") . '>';
-        $content .= '<summary>';
-        $content .= '<a href="' . $url . $x_page_route . $x_archive_route . '/' . $k . '/1">';
-        $content .= $k . ' <span class="count">' . count($v) . '</span>';
+        $content .= '<details' . (($open = $k === explode('-', $current)[0]) ? ' open' : "") . ' role="tree">';
+        $content .= '<summary aria-level="1" role="treeitem">';
+        $content .= '<a' . ($open ? ' aria-current="page"' : "") . ' href="' . $url . $x_page_route . $x_archive_route . '/' . $k . '/1">';
+        $content .= $k . ' <span aria-label="' . i('%d archive' . (1 === ($i = count($v)) ? "" : 's'), [$i]) . '" role="status">' . $i . '</span>';
         $content .= '</a>';
         $content .= '</summary>';
         if (is_array($v)) {
             krsort($v);
-            $content .= '<ul>';
+            $content .= '<ul role="group">';
             foreach ($v as $kk => $vv) {
-                $content .= '<li' . ($k . '-' . $kk === $current ? ' class="current"' : "") . '>';
-                $content .= '<a href="' . $url . $x_page_route . $x_archive_route . '/' . $k . '-' . $kk . '/1">';
-                $content .= $k . ' ' . i($dates[((int) $kk) - 1]) . ' <span class="count">' . count($vv) . '</span>';
+                $content .= '<li aria-level="2" role="treeitem">';
+                $content .= '<a' . ($k . '-' . $kk === $current ? ' aria-current="page"' : "") . ' href="' . $url . $x_page_route . $x_archive_route . '/' . $k . '-' . $kk . '/1">';
+                $content .= $k . ' ' . i($dates[((int) $kk) - 1]) . ' <span aria-label="' . i('%d post' . (1 === ($ii = count($vv)) ? "" : 's'), [$ii]) . '" role="status">' . $ii . '</span>';
                 $content .= '</a>';
                 $content .= '</li>';
             }
@@ -58,10 +58,10 @@ if (isset($state->x->archive)) {
         $content .= '</details>';
     }
 } else {
-    $content .= '<p>' . i('Missing %s extension.', ['<a href="https://mecha-cms.com/store/extension/archive" target="_blank">archive</a>']) . '</p>';
+    $content .= '<p role="status">' . i('Missing %s extension.', ['<a href="https://mecha-cms.com/store/extension/archive" target="_blank">archive</a>']) . '</p>';
 }
 
 echo self::widget([
-    'title' => $title ?? i('Archives'),
-    'content' => $content ?: '<p>' . i('No %s yet.', ['posts']) . '</p>'
+    'content' => $content ?: '<p role="status">' . i('No %s yet.', ['posts']) . '</p>',
+    'title' => $title ?? i('Archives')
 ]);

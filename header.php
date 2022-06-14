@@ -1,9 +1,9 @@
 <header class="header">
   <h1>
     <?php if ($site->is('home')): ?>
-      <span>
+      <a aria-current="page">
         <?= $site->title; ?>
-      </span>
+      </a>
     <?php else: ?>
       <a href="<?= $url; ?>">
         <?= $site->title; ?>

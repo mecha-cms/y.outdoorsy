@@ -1,12 +1,8 @@
 <?php
 
 return [
-    'x' => [
-        'comment' => [
-            'page' => ['type' => 'Markdown']
-        ],
-        'page' => [
-            'page' => ['type' => 'Markdown']
-        ]
+    'page' => [
+        'header' => true, // Enable parent’s page description and title on pages view?
+        'timeFormat' => '%A, %B %d, %Y'
     ]
 ];

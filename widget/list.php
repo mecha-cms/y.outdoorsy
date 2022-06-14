@@ -13,13 +13,9 @@ if (!isset($target)) {
 if (!empty($lot['lot'])) {
     $content .= '<ul>';
     foreach ((array) $lot['lot'] as $k => $v) {
-        if ($k === $current) {
-            $content .= '<li class="current">';
-        } else {
-            $content .= '<li>';
-        }
+        $content .= '<li>';
         if (false !== strpos($k, '://')) {
-            $content .= '<a href="' . $k . '"' . ($target ? ' target="' . $target . '"' : "") . '>';
+            $content .= '<a' . ($k === $current ? ' aria-current="page"' : "") . ' href="' . $k . '"' . ($target ? ' target="' . $target . '"' : "") . '>';
             $content .= $v;
             $content .= '</a>';
         } else {
@@ -31,6 +27,6 @@ if (!empty($lot['lot'])) {
 }
 
 echo self::widget([
-    'title' => $title ?? "",
-    'content' => $content
+    'content' => $content,
+    'title' => $title ?? ""
 ]);

@@ -3,20 +3,20 @@
 $content = "";
 
 if (isset($state->x->search)) {
-    $to = $url . ($route ?? $state->routeBlog);
-    $value = get($_GET, $key = $state->x->search->key ?? 'q');
-    $content .= '<form action="' . $to . '" class="form-search" method="get">';
+    $to = $url . ($path ?? $state->routeBlog);
+    $value = \get($_GET, $key = $state->x->search->key ?? 'query');
+    $content .= '<form action="' . $to . '" method="get" name="search" role="search">';
     $content .= '<p>';
-    $content .= '<input name="' . $key . '" class="input" type="text"' . ($value ? ' value="' . From::HTML($value) . '"' : "") . '>';
+    $content .= '<input name="' . $key . '" type="text"' . ($value ? ' value="' . From::HTML($value) . '"' : "") . '>';
     $content .= ' ';
-    $content .= '<button class="button" type="submit">' . i('Search') . '</button>';
+    $content .= '<button type="submit">' . i('Search') . '</button>';
     $content .= '</p>';
     $content .= '</form>';
 } else {
-    $content .= '<p>' . i('Missing %s extension.', ['<a href="https://mecha-cms.com/store/extension/search" target="_blank">search</a>']) . '</p>';
+    $content .= '<p role="status">' . i('Missing %s extension.', ['<a href="https://mecha-cms.com/store/extension/search" target="_blank">search</a>']) . '</p>';
 }
 
 echo self::widget([
-    'title' => $title ?? i('Search'),
-    'content' => $content
+    'content' => $content,
+    'title' => $title ?? i('Search')
 ]);

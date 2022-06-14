@@ -1,7 +1,7 @@
 <?php
 
 $pages = [];
-$pages_data = Pages::from(LOT . D . 'page' . ($route ?? $state->routeBlog))->sort([$sort[0] ?? -1, $sort[1] ?? 'time']);
+$pages_data = Pages::from(LOT . D . 'page' . ($path ?? $state->routeBlog))->sort([$sort[0] ?? -1, $sort[1] ?? 'time']);
 
 if (!empty($shake)) {
     $pages_data->shake();
@@ -12,9 +12,9 @@ foreach ($pages_data->chunk($take ?? 5, 0) as $page) {
 }
 
 echo $pages ? self::widget('list', [
-    'title' => $title ?? "",
-    'lot' => $pages
+    'lot' => $pages,
+    'title' => $title ?? ""
 ]) : self::widget([
-    'title' => $title ?? "",
-    'content' => '<p>' . i('No %s yet.', ['posts']) . '</p>'
+    'content' => '<p role="status">' . i('No %s yet.', ['posts']) . '</p>',
+    'title' => $title ?? ""
 ]);

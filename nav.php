@@ -5,9 +5,9 @@
   <ul>
     <li>
       <?php if ($site->is('home')): ?>
-        <span>
+        <a aria-current="page">
           <?= i('Home'); ?>
-        </span>
+        </a>
       <?php else: ?>
         <a href="<?= $url; ?>">
           <?= i('Home'); ?>
@@ -17,9 +17,9 @@
     <?php foreach ($links as $link): ?>
       <li>
         <?php if ($link->current): ?>
-          <span>
+          <a aria-current="page">
             <?= $link->title; ?>
-          </span>
+          </a>
         <?php else: ?>
           <a href="<?= $link->link ?: $link->url; ?>">
             <?= $link->title; ?>
