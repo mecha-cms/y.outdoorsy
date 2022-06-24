@@ -1,0 +1,16 @@
+{
+  "description": "Two columns blog layout with old paper background.",
+  "license": "GPL-3.0-or-later",
+  "name": "mecha-cms/y.outdoorsy",
+  "require": {
+    "mecha-cms/x.archive": "^2.0.0",
+    "mecha-cms/x.search": "^2.0.0",
+    "mecha-cms/x.tag": "^2.0.0"
+  },
+  "suggest": {
+    "mecha-cms/x.comment": "Install this extension if you want to have comment feature in your blog.",
+    "mecha-cms/x.feed": "Install this extension if you want to have feed feature in your blog.",
+    "mecha-cms/x.sitemap": "Install this extension if you want to have sitemap feature in your blog.",
+    "mecha-cms/x.user": "Install this extension if you want to have log-in/out feature in your blog."
+  }
+}
