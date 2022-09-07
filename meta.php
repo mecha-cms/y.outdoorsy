@@ -12,13 +12,14 @@ if (isset($state->x->sitemap)) {
 
 if (isset($state->x->user)) {
     $route = $state->x->user->route ?? '/user';
+    $route_secret = $state->x->user->guard->route ?? $route;
     if (Is::user()) {
-        $metas[$url . $route . '/' . $user->name . $url->query([
+        $metas[$url . $route_secret . '/' . $user->name . $url->query([
             'exit' => $user->token,
             'kick' => $url->path
         ])] = 'Exit';
     } else {
-        $metas[$url . $route . $url->query([
+        $metas[$url . $route_secret . $url->query([
             'kick' => $url->path
         ])] = 'Enter';
     }
