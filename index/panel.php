@@ -5,7 +5,7 @@ if ('POST' === $_SERVER['REQUEST_METHOD'] && empty($_POST['state']['y']['outdoor
     $_POST['state']['y']['outdoorsy']['page']['header'] = false;
 }
 
-Hook::set('_', function($_) use($state, $url) {
+Hook::set('_', function ($_) use ($state, $url) {
     if ('.state' === $_['path']) {
         $time = new Time;
         $formats = [];
