@@ -1,6 +1,6 @@
 <?php
 
-if ('POST' === $_SERVER['REQUEST_METHOD'] && empty($_POST['state']['y']['outdoorsy']['page']['header'])) {
+if ('POST' === $_SERVER['REQUEST_METHOD'] && '.state' === $_['path'] && empty($_POST['state']['y']['outdoorsy']['page']['header'])) {
     // Set default value to `false`
     $_POST['state']['y']['outdoorsy']['page']['header'] = false;
 }
