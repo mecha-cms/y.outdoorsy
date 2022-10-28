@@ -2,14 +2,14 @@
   <ul>
     <li>
       <?php if ($prev = $pager->prev): ?>
-        <a href="<?= $prev->link ?? $prev->url; ?>" rel="prev">
+        <a href="<?= From::HTML(($prev->link ?? $prev->url ?? "") . $url->query . $url->hash); ?>" rel="prev">
           <?= i('Newer'); ?>
         </a>
       <?php endif; ?>
     </li>
     <li>
       <?php if ($parent = $pager->parent): ?>
-        <a href="<?= $parent->link ?? $parent->url; ?>">
+        <a href="<?= From::HTML(($parent->link ?? $parent->url ?? "") . $url->query . $url->hash); ?>">
           <?= i('Parent'); ?>
         </a>
       <?php elseif (!$site->is('home')): ?>
@@ -20,7 +20,7 @@
     </li>
     <li>
       <?php if ($next = $pager->next): ?>
-        <a href="<?= $next->link ?? $next->url; ?>" rel="next">
+        <a href="<?= From::HTML(($next->link ?? $next->url ?? "") . $url->query . $url->hash); ?>" rel="next">
           <?= i('Older'); ?>
         </a>
       <?php endif; ?>
