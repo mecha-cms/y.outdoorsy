@@ -323,8 +323,12 @@ legend + p {
   top: 0;
 }
 
-.header h1 [aria-current='page'] {
+.header h1 a {
   color: inherit;
+}
+
+.header h1 [aria-current='page'] {
+  cursor: default;
   text-decoration: none;
 }
 

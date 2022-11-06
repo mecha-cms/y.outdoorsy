@@ -35,14 +35,17 @@ if (!empty($state->y->outdoorsy->page->header) && $state->is('pages')) {
 }
 
 if (isset($state->x->alert)) {
-    Hook::set('route.archive', function ($content, $path, $query, $hash, $data) {
+    Hook::set('route.archive', function ($content, $path, $query, $hash) {
+        $data = From::query($query);
         $archive = new Time(substr_replace('1970-01-01-00-00-00', $name = $data['name'], 0, strlen($name)));
         Alert::info('Showing %s published in %s.', ['posts', '<em>' . $archive->i((false === strpos($name, '-') ? "" : '%B ') . '%Y') . '</em>']);
     });
-    Hook::set('route.search', function ($content, $path, $query, $hash, $data) {
+    Hook::set('route.search', function ($content, $path, $query, $hash) {
+        $data = From::query($query);
         Alert::info('Showing %s matched with query %s.', ['posts', '<em>' . $data['query'] . '</em>']);
     });
-    Hook::set('route.tag', function ($content, $path, $query, $hash, $data) {
+    Hook::set('route.tag', function ($content, $path, $query, $hash) {
+        $data = From::query($query);
         if (is_file($file = LOT . D . 'tag' . D . $data['name'] . '.page')) {
             $tag = new Tag($file);
             Alert::info('Showing %s tagged in %s.', ['posts', '<em>' . $tag->title . '</em>']);
