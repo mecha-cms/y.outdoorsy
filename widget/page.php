@@ -1,7 +1,7 @@
 <?php
 
 $pages = [];
-$pages_data = Pages::from(LOT . D . 'page' . ($path ?? $state->routeBlog))->sort([$sort[0] ?? -1, $sort[1] ?? 'time']);
+$pages_data = Pages::from(LOT . D . 'page' . ($route ?? $state->routeBlog))->sort([$sort[0] ?? -1, $sort[1] ?? 'time']);
 
 if (!empty($shake)) {
     $pages_data->shake();

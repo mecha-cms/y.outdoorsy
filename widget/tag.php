@@ -3,7 +3,7 @@
 if (isset($state->x->tag)) {
     $tags = [];
     $tags_found = [];
-    foreach (g($folder = LOT . D . 'page' . ($path ?? $state->routeBlog), 'page') as $k => $v) {
+    foreach (g($folder = LOT . D . 'page' . ($route ?? $state->routeBlog), 'page') as $k => $v) {
         $page = new Page($k);
         $v = (array) ($page->kind ?? []);
         $v && ($tags_found = array_merge($tags_found, $v));
