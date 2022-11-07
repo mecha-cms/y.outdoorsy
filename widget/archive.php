@@ -4,11 +4,11 @@ $content = "";
 
 if (isset($state->x->archive)) {
     $archives = [];
-    $x_archive_route = $state->x->archive->route ?? '/archive';
-    $x_page_route = $path ?? $state->routeBlog;
-    foreach (g(LOT . D . 'page' . $x_page_route, 'page') as $k => $v) {
-        $page = new Page($k);
-        $v = $page->time;
+    $route_archive = $state->x->archive->route ?? '/archive';
+    $route_page = $path ?? $state->routeBlog;
+    foreach (g(LOT . D . 'page' . $route_page, 'page') as $k => $v) {
+        $p = new Page($k);
+        $v = $p->time;
         if ($v) {
             $v = explode('-', $v);
             $archives[$v[0]][$v[1]][] = 1;
@@ -30,6 +30,8 @@ if (isset($state->x->archive)) {
     ];
     if ($site->is('archives')) {
         $current = $archive->format('Y-m');
+    } else if ($site->is('page')) {
+        $current = $page->time->format('Y-m');
     }
     krsort($archives);
     foreach ($archives as $k => $v) {
@@ -39,7 +41,7 @@ if (isset($state->x->archive)) {
         }
         $content .= '<details' . (($open = $k === explode('-', $current)[0]) ? ' open' : "") . ' role="tree">';
         $content .= '<summary aria-level="1" role="treeitem">';
-        $content .= '<a' . ($open ? ' aria-current="page"' : "") . ' href="' . $url . $x_page_route . $x_archive_route . '/' . $k . '/1">';
+        $content .= '<a' . ($open ? ' aria-current="page"' : "") . ' href="' . $url . $route_page . $route_archive . '/' . $k . '/1">';
         $content .= $k . ' <span aria-label="' . i('%d archive' . (1 === ($i = count($v)) ? "" : 's'), [$i]) . '" role="status">' . $i . '</span>';
         $content .= '</a>';
         $content .= '</summary>';
@@ -48,7 +50,7 @@ if (isset($state->x->archive)) {
             $content .= '<ul role="group">';
             foreach ($v as $kk => $vv) {
                 $content .= '<li aria-level="2" role="treeitem">';
-                $content .= '<a' . ($k . '-' . $kk === $current ? ' aria-current="page"' : "") . ' href="' . $url . $x_page_route . $x_archive_route . '/' . $k . '-' . $kk . '/1">';
+                $content .= '<a' . ($k . '-' . $kk === $current ? ' aria-current="page"' : "") . ' href="' . $url . $route_page . $route_archive . '/' . $k . '-' . $kk . '/1">';
                 $content .= $k . ' ' . i($dates[((int) $kk) - 1]) . ' <span aria-label="' . i('%d post' . (1 === ($ii = count($vv)) ? "" : 's'), [$ii]) . '" role="status">' . $ii . '</span>';
                 $content .= '</a>';
                 $content .= '</li>';

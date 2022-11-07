@@ -2,25 +2,27 @@
   <ul>
     <li>
       <?php if ($prev = $pager->prev): ?>
-        <a href="<?= From::HTML(($prev->link ?? $prev->url ?? "") . $url->query . $url->hash); ?>" rel="prev">
+        <a href="<?= $prev->link; ?>" rel="prev" title="<?= $prev->description; ?>">
           <?= i('Newer'); ?>
         </a>
       <?php endif; ?>
     </li>
     <li>
-      <?php if ($parent = $pager->parent): ?>
-        <a href="<?= From::HTML(($parent->link ?? $parent->url ?? "") . $url->query . $url->hash); ?>">
-          <?= i('Parent'); ?>
+      <?php if ($parent = $page->parent): ?>
+        <a href="<?= $parent->url; ?>" title="<?= $parent->description; ?>">
+          <?= $parent->title ?? i('Parent'); ?>
         </a>
-      <?php elseif (!$site->is('home')): ?>
-        <a href="<?= $url; ?>">
-          <?= i('Home'); ?>
-        </a>
+      <?php else: ?>
+        <?php if (!$site->is('home')): ?>
+          <a href="<?= $url; ?>">
+            <?= i('Home'); ?>
+          </a>
+        <?php endif; ?>
       <?php endif; ?>
     </li>
     <li>
       <?php if ($next = $pager->next): ?>
-        <a href="<?= From::HTML(($next->link ?? $next->url ?? "") . $url->query . $url->hash); ?>" rel="next">
+        <a href="<?= $next->link; ?>" rel="next" title="<?= $next->description; ?>">
           <?= i('Older'); ?>
         </a>
       <?php endif; ?>
