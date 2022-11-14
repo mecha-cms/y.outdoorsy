@@ -2,6 +2,9 @@
 title: Outdoorsy
 description: Two columns blog layout with old paper background.
 image: /lot/y/outdoorsy/index.png
+images:
+- /lot/y/outdoorsy/index.png
+- /lot/y/outdoorsy/index/1.png
 author: Taufik Nurrohman
 link: http://www.themespreview.com
 type: Markdown
