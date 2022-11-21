@@ -35,20 +35,36 @@ if (!empty($state->y->outdoorsy->page->header) && $state->is('pages')) {
 }
 
 if (isset($state->x->alert)) {
-    Hook::set('route.archive', function ($content, $path, $query, $hash) {
+    if ($search = trim(strip_tags(isset($state->x->search) ? ($_GET[$state->x->search->key ?? 'query'] ?? "") : ""))) {
+        Hook::set('route.search', function ($content, $path, $query, $hash) use ($search, $state) {
+            if (!$state->is('archives') && !$state->is('tags')) {
+                Alert::info('Showing %s matched with query %s.', ['posts', '<em>' . $search . '</em>']);
+            }
+        });
+    }
+    Hook::set('route.archive', function ($content, $path, $query, $hash) use ($search, $state) {
         $data = From::query($query);
-        $archive = new Time(substr_replace('1970-01-01-00-00-00', $name = $data['name'], 0, strlen($name)));
-        Alert::info('Showing %s published in %s.', ['posts', '<em>' . $archive->i((false === strpos($name, '-') ? "" : '%B ') . '%Y') . '</em>']);
+        if ($name = $data['name'] ?? "") {
+            $archive = new Time(substr_replace('1970-01-01-00-00-00', $name, 0, strlen($name)));
+            $format = (false === strpos($name, '-') ? "" : '%B ') . '%Y';
+            if ($search) {
+                Alert::info('Showing %s published in %s and matched with query %s.', ['posts', '<em>' . $archive->i($format) . '</em>', '<em>' . $search . '</em>']);
+            } else {
+                Alert::info('Showing %s published in %s.', ['posts', '<em>' . $archive->i($format) . '</em>']);
+            }
+        }
     });
-    Hook::set('route.search', function ($content, $path, $query, $hash) {
+    Hook::set('route.tag', function ($content, $path, $query, $hash) use ($search, $state) {
         $data = From::query($query);
-        Alert::info('Showing %s matched with query %s.', ['posts', '<em>' . $data['query'] . '</em>']);
-    });
-    Hook::set('route.tag', function ($content, $path, $query, $hash) {
-        $data = From::query($query);
-        if (is_file($file = LOT . D . 'tag' . D . $data['name'] . '.page')) {
-            $tag = new Tag($file);
-            Alert::info('Showing %s tagged in %s.', ['posts', '<em>' . $tag->title . '</em>']);
+        if ($name = $data['name'] ?? "") {
+            if (is_file($file = LOT . D . 'tag' . D . $name . '.page')) {
+                $tag = new Tag($file);
+                if ($search) {
+                    Alert::info('Showing %s tagged in %s and matched with query %s.', ['posts', '<em>' . $tag->title . '</em>', '<em>' . $search . '</em>']);
+                } else {
+                    Alert::info('Showing %s tagged in %s.', ['posts', '<em>' . $tag->title . '</em>']);
+                }
+            }
         }
     });
     Hook::set('y.alert', function ($alert) {
