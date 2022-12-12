@@ -3,7 +3,7 @@
     <li>
       <?php if ($prev = $pager->prev): ?>
         <a href="<?= $prev->link; ?>" rel="prev" title="<?= w($prev->description); ?>">
-          <?= i('Newer'); ?>
+          <?= i('Newer %s', 'Posts'); ?>
         </a>
       <?php endif; ?>
     </li>
@@ -23,7 +23,7 @@
     <li>
       <?php if ($next = $pager->next): ?>
         <a href="<?= $next->link; ?>" rel="next" title="<?= w($next->description); ?>">
-          <?= i('Older'); ?>
+          <?= i('Older %s', 'Posts'); ?>
         </a>
       <?php endif; ?>
     </li>
