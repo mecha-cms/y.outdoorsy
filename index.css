@@ -714,6 +714,18 @@ textarea {
   margin-top: 20px;
 }
 
+.page [role='doc-toc'] [role='doc-pagelist'] li:last-child::after {
+  background: #fef4db url('back-repeat-enter.jpg') no-repeat -150px -150px;
+}
+
+.page [role='doc-toc'] [role='heading'] {
+  padding-left: 0;
+}
+
+.page [role='doc-toc'] [role='heading']::before {
+  display: none;
+}
+
 .page > footer {
   font-family: var(--font-1);
   font-size: 90%;
