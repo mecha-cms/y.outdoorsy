@@ -15,7 +15,7 @@ if (!empty($lot['lot'])) {
     foreach ((array) $lot['lot'] as $k => $v) {
         $content .= '<li>';
         if (false !== strpos($k, '://')) {
-            $content .= '<a' . ($k === $current ? ' aria-current="page"' : "") . ' href="' . $k . '"' . ($target ? ' target="' . $target . '"' : "") . '>';
+            $content .= '<a' . ($k === $current ? ' aria-current="page"' : "") . ' href="' . eat($k) . '"' . ($target ? ' target="' . $target . '"' : "") . '>';
             $content .= $v;
             $content .= '</a>';
         } else {

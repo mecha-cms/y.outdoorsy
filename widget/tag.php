@@ -17,7 +17,7 @@ if (isset($state->x->tag)) {
                         $folder . '.page'
                     ], 1) ?: null
                 ]);
-                $tags[$tag->link] = $tag->title . ' <span aria-label="' . i('%d post' . (1 === $v ? "" : 's'), [$v]) . '" role="status">' . $v . '</span>';
+                $tags[$tag->link] = $tag->title . ' <span aria-label="' . eat(i('%d post' . (1 === $v ? "" : 's'), [$v])) . '" role="status">' . $v . '</span>';
             }
         }
     }

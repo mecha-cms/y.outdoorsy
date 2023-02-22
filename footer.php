@@ -6,7 +6,7 @@
   <div class="foot">
     <?= self::meta(); ?>
     <span class="rights">
-      &#x00A9; <?= $date->year; ?> <a href="<?= $url; ?>">
+      &#x00A9; <?= $date->year; ?> <a href="<?= eat($url); ?>">
         <?= $site->title; ?>
       </a> <span>
         <!-- You have to maintain this back link to support me, or make a proper donation to remove it. -->

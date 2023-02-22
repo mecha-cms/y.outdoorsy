@@ -33,7 +33,7 @@ if ($metas) {
     echo '<ul>';
     foreach ($metas as $k => $v) {
         echo '<li>';
-        echo '<a href="' . From::HTML($k) . '">' . i($v) . '</a>';
+        echo '<a href="' . eat($k) . '">' . i($v) . '</a>';
         echo '</li>';
     }
     echo '</ul>';

@@ -21,7 +21,7 @@
             <?= $link->title; ?>
           </a>
         <?php else: ?>
-          <a href="<?= $link->link ?: $link->url; ?>">
+          <a href="<?= eat($link->link ?: $link->url); ?>">
             <?= $link->title; ?>
           </a>
         <?php endif; ?>

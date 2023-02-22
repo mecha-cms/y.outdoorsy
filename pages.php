@@ -16,23 +16,23 @@
     <?php $date_time_format = $state->y->outdoorsy->page->timeFormat ?? '%F %T'; ?>
     <?php if ($pages->count): ?>
       <?php foreach ($pages as $page): ?>
-        <article class="page" id="page:<?= $page->id; ?>">
+        <article class="page" id="page:<?= eat($page->id); ?>">
           <header>
             <?php if ($title = $page->title): ?>
               <h3>
                 <?php if ($link = $page->link): ?>
-                  <a href="<?= $link; ?>" target="_blank">
+                  <a href="<?= eat($link); ?>" target="_blank">
                     &#x2BB3; <?= $title; ?>
                   </a>
                 <?php else: ?>
-                  <a href="<?= $page->url; ?>">
+                  <a href="<?= eat($page->url); ?>">
                     <?= $title; ?>
                   </a>
                 <?php endif; ?>
               </h3>
             <?php endif; ?>
             <p>
-              <time datetime="<?= $page->time->format('c'); ?>">
+              <time datetime="<?= eat($page->time->format('c')); ?>">
                 <?= $page->time($date_time_format); ?>
               </time>
             </p>
@@ -43,7 +43,7 @@
             <?php endif; ?>
             <?= preg_replace('/<a(\s[^>]*?)?>|<\/a>/', "", $excerpt); ?>
             <p>
-              <a href="<?= $page->url; ?>#next:<?= $page->id; ?>">
+              <a href="<?= eat($page->url); ?>#next:<?= eat($page->id); ?>">
                 <?= i('Read More'); ?>
               </a>
             </p>
