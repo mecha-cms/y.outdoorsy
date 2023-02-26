@@ -624,7 +624,6 @@ input[type='number'] {
 [role='combobox'],
 [role='listbox'],
 select {
-  -moz-padding-start: 1px;
   appearance: none;
   cursor: pointer;
 }
