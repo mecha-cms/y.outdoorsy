@@ -78,6 +78,6 @@ if (isset($state->x->alert)) {
 
 if (isset($state->x->excerpt) && $state->is('page')) {
     Hook::set('page.content', function ($content) {
-        return strtr($content, ["\f" => '<hr id="next:' . $this->id . '" role="doc-pagebreak">']);
+        return null !== $content ? strtr($content, ["\f" => '<hr id="next:' . $this->id . '" role="doc-pagebreak">']) : null;
     });
 }

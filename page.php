@@ -16,7 +16,13 @@
       <?php endif; ?>
     </header>
     <div>
-      <?= $page->content; ?>
+      <?php if ($content = $page->content): ?>
+        <?= $content; ?>
+      <?php else: ?>
+        <p role="status">
+          <?= i('No %s.', 'content'); ?>
+        </p>
+      <?php endif; ?>
       <?php if ($link = $page->link): ?>
         <p role="group">
           <a href="<?= eat($link); ?>" rel="nofollow" role="button" target="_blank">

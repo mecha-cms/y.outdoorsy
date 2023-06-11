@@ -58,6 +58,12 @@ details summary:hover {
   text-decoration: underline;
 }
 
+a[aria-disabled='true'] {
+  color: inherit;
+  cursor: default;
+  text-decoration: none;
+}
+
 abbr {
   border: 0;
   text-decoration: none;
