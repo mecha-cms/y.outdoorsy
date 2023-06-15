@@ -248,6 +248,11 @@ ol {
   list-style: decimal;
 }
 
+li > a + ol,
+li > a + ul {
+  margin-top: 0;
+}
+
 li p:last-child {
   margin-bottom: 15px;
 }

@@ -22,7 +22,7 @@
               <h3>
                 <?php if ($link = $page->link): ?>
                   <a href="<?= eat($link); ?>" target="_blank">
-                    &#x2BB3; <?= $title; ?>
+                    &#x27a0; <?= $title; ?>
                   </a>
                 <?php else: ?>
                   <a href="<?= eat($page->url); ?>">
