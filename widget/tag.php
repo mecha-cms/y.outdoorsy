@@ -1,9 +1,18 @@
 <?php
 
 if (isset($state->x->tag)) {
+    $deep = 0;
+    $folder = LOT . D . 'page' . ($route ?? $state->routeBlog);
+    if ($file = exist([
+        $folder . '.archive',
+        $folder . '.page'
+    ], 1)) {
+        $page = new Page($file);
+        $deep = $page->deep ?? 0;
+    }
     $tags = [];
     $tags_found = [];
-    foreach (g($folder = LOT . D . 'page' . ($route ?? $state->routeBlog), 'page') as $k => $v) {
+    foreach (g($folder, 'page', $deep) as $k => $v) {
         $page = new Page($k);
         $v = (array) ($page->kind ?? []);
         $v && ($tags_found = array_merge($tags_found, $v));
@@ -11,12 +20,7 @@ if (isset($state->x->tag)) {
     foreach (array_count_values($tags_found) as $k => $v) {
         if ($n = To::tag($k)) {
             if (is_file($f = LOT . D . 'tag' . D . $n . '.page')) {
-                $tag = new Tag($f, [
-                    'parent' => exist([
-                        $folder . '.archive',
-                        $folder . '.page'
-                    ], 1) ?: null
-                ]);
+                $tag = new Tag($f, ['parent' => $file ?: null]);
                 $tags[$tag->link] = $tag->title . ' <span aria-label="' . eat(i('%d post' . (1 === $v ? "" : 's'), [$v])) . '" role="status">' . $v . '</span>';
             }
         }

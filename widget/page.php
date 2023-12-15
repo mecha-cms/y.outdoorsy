@@ -1,7 +1,17 @@
 <?php
 
+$deep = 0;
+$folder = LOT . D . 'page' . ($route ?? $state->routeBlog);
+if ($file = exist([
+    $folder . '.archive',
+    $folder . '.page'
+], 1)) {
+    $page = new Page($file);
+    $deep = $page->deep ?? 0;
+}
+
 $pages = [];
-$pages_data = Pages::from(LOT . D . 'page' . ($route ?? $state->routeBlog))->sort([$sort[0] ?? -1, $sort[1] ?? 'time']);
+$pages_data = Pages::from($folder, 'page', $deep)->sort([$sort[0] ?? -1, $sort[1] ?? 'time']);
 
 if (!empty($shake)) {
     $pages_data->shake();

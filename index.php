@@ -20,14 +20,14 @@ $GLOBALS['links'] = new Anemone((static function ($links, $state, $url) {
     return $links;
 })([], $state, $url));
 
-$defaults = [
+$states = [
     'route-blog' => '/article',
-    'x.comment.page.type' => 'Markdown',
-    'x.page.page.type' => 'Markdown'
+    'x.comment.page.type' => isset($state->x->comment) ? 'Markdown' : null,
+    'x.page.page.type' => isset($state->x->page) ? 'Markdown' : null
 ];
 
-foreach ($defaults as $k => $v) {
-    !State::get($k) && State::set($k, $v);
+foreach ($states as $k => $v) {
+    !State::get($k) && null !== $v && State::set($k, $v);
 }
 
 if (!empty($state->y->outdoorsy->page->header) && $state->is('pages')) {
@@ -38,7 +38,7 @@ if (isset($state->x->alert)) {
     if ($search = trim(strip_tags(isset($state->x->search) ? ($_GET[$state->x->search->key ?? 'query'] ?? "") : ""))) {
         Hook::set('route.search', function ($content, $path, $query, $hash) use ($search, $state) {
             if (!$state->is('archives') && !$state->is('tags')) {
-                Alert::info('Showing %s matched with query %s.', ['posts', '<em>' . $search . '</em>']);
+                Alert::info('Showing %s matched with query %s.', ['posts', '<b>' . $search . '</b>']);
             }
         });
     }
@@ -48,9 +48,9 @@ if (isset($state->x->alert)) {
             $archive = new Time(substr_replace('1970-01-01-00-00-00', $name, 0, strlen($name)));
             $format = (false === strpos($name, '-') ? "" : '%B ') . '%Y';
             if ($search) {
-                Alert::info('Showing %s published in %s and matched with query %s.', ['posts', '<em>' . $archive->i($format) . '</em>', '<em>' . $search . '</em>']);
+                Alert::info('Showing %s published in %s and matched with query %s.', ['posts', '<b>' . $archive->i($format) . '</b>', '<b>' . $search . '</b>']);
             } else {
-                Alert::info('Showing %s published in %s.', ['posts', '<em>' . $archive->i($format) . '</em>']);
+                Alert::info('Showing %s published in %s.', ['posts', '<b>' . $archive->i($format) . '</b>']);
             }
         }
     });
@@ -60,9 +60,9 @@ if (isset($state->x->alert)) {
             if (is_file($file = LOT . D . 'tag' . D . $name . '.page')) {
                 $tag = new Tag($file);
                 if ($search) {
-                    Alert::info('Showing %s tagged in %s and matched with query %s.', ['posts', '<em>' . $tag->title . '</em>', '<em>' . $search . '</em>']);
+                    Alert::info('Showing %s tagged in %s and matched with query %s.', ['posts', '<b>' . $tag->title . '</b>', '<b>' . $search . '</b>']);
                 } else {
-                    Alert::info('Showing %s tagged in %s.', ['posts', '<em>' . $tag->title . '</em>']);
+                    Alert::info('Showing %s tagged in %s.', ['posts', '<b>' . $tag->title . '</b>']);
                 }
             }
         }

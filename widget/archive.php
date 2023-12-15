@@ -4,9 +4,18 @@ $content = "";
 
 if (isset($state->x->archive)) {
     $archives = [];
+    $deep = 0;
     $route_archive = $state->x->archive->route ?? '/archive';
     $route_blog = $route ?? $state->routeBlog;
-    foreach (g(LOT . D . 'page' . $route_blog, 'page') as $k => $v) {
+    $folder = LOT . D . 'page' . $route_blog;
+    if ($file = exist([
+        $folder . '.archive',
+        $folder . '.page'
+    ], 1)) {
+        $p = new Page($file);
+        $deep = $p->deep ?? 0;
+    }
+    foreach (g($folder, 'page', $deep) as $k => $v) {
         $p = new Page($k);
         $v = $p->time;
         if ($v) {
