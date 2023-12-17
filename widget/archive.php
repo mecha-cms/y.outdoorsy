@@ -6,7 +6,7 @@ if (isset($state->x->archive)) {
     $archives = [];
     $deep = 0;
     $route_archive = $state->x->archive->route ?? '/archive';
-    $route_blog = $route ?? $state->routeBlog;
+    $route_blog = $route ?? $state->routeBlog ?? '/article';
     $folder = LOT . D . 'page' . $route_blog;
     if ($file = exist([
         $folder . '.archive',

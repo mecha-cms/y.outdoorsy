@@ -2,7 +2,7 @@
 
 if (isset($state->x->tag)) {
     $deep = 0;
-    $folder = LOT . D . 'page' . ($route ?? $state->routeBlog);
+    $folder = LOT . D . 'page' . ($route ?? $state->routeBlog ?? '/article');
     if ($file = exist([
         $folder . '.archive',
         $folder . '.page'
