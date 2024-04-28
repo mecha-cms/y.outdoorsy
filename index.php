@@ -3,7 +3,7 @@
 $z = defined('TEST') && TEST ? '.' : '.min.';
 Asset::set(__DIR__ . D . 'index' . $z . 'css', 20);
 
-$GLOBALS['links'] = new Anemone((static function ($links, $state, $url) {
+lot('links', new Anemone((static function ($links, $state, $url) {
     $index = LOT . D . 'page' . D . trim(strtr($state->route, '/', D), D) . '.page';
     $path = $url->path . '/';
     foreach (g(LOT . D . 'page', 'page') as $k => $v) {
@@ -18,7 +18,7 @@ $GLOBALS['links'] = new Anemone((static function ($links, $state, $url) {
     }
     ksort($links);
     return $links;
-})([], $state, $url));
+})([], $state, $url)));
 
 $states = [
     'route-blog' => '/article',

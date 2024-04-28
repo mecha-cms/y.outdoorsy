@@ -6,10 +6,6 @@
   word-wrap: break-word;
 }
 
-:focus {
-  outline: none;
-}
-
 ::placeholder {
   opacity: 0.5;
 }
@@ -533,15 +529,6 @@ input[type='submit'] {
   text-decoration: none !important;
   user-select: none;
   width: auto;
-}
-
-[role='button']:focus,
-button:focus,
-input[type='button']:focus,
-input[type='reset']:focus,
-input[type='submit']:focus {
-  outline: 1px dotted rgba(0, 0, 0, 0.25);
-  outline-offset: -1px;
 }
 
 [role='combobox']:focus,
