@@ -1,0 +1,22 @@
+.comment-author {
+  font-weight: bold;
+}
+
+.comment + .comment,
+.comment .comments {
+  margin-top: 15px;
+}
+
+.comments,
+.comments-body,
+.comments-footer {
+  margin-top: 15px;
+}
+
+.comment-tasks {
+  @extend %small;
+}
+
+#comments {
+  margin-top: 30px;
+}

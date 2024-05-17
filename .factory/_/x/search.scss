@@ -1,0 +1,16 @@
+form {
+  &[name='search'] {
+    button {
+      margin-left: 3px;
+    }
+    input {
+      flex: 1;
+      max-width: 100%;
+      min-width: 0;
+    }
+    p {
+      display: flex;
+      margin: 0;
+    }
+  }
+}

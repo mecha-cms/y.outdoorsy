@@ -24,15 +24,3 @@
       <div class="content">
         <main class="main">
           <?= self::alert(); ?>
-          <header>
-            <?php if ($title = $page->title): ?>
-              <h2>
-                <?= $title; ?>
-              </h2>
-            <?php endif; ?>
-            <?php if ($description = $page->description): ?>
-              <p>
-                <?= $description; ?>
-              </p>
-            <?php endif; ?>
-          </header>
