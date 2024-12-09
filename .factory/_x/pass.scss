@@ -1,0 +1,7 @@
+@mixin pass {
+  form {
+    &[name='pass'] {
+      margin-top: 150px;
+    }
+  }
+}

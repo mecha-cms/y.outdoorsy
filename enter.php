@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta content="width=1024" name="viewport">
-    <?php if ($w = w($page->description ?? $site->description ?? "")): ?>
-      <meta content="<?= $w; ?>" name="description">
+    <?php if ($v = w($page->description ?? $site->description ?? "")): ?>
+      <meta content="<?= $v; ?>" name="description">
     <?php endif; ?>
     <?php if ('archive' === $page->x): ?>
       <!-- Prevent search engines from indexing pages with `archive` state -->

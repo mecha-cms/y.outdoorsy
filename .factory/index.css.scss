@@ -1,3 +1,5 @@
+@use 'x';
+
 *,
 ::after,
 ::before {
@@ -903,10 +905,10 @@ textarea {
   }
 }
 
-@import './_/x/alert';
-@import './_/x/comment';
-@import './_/x/markdown';
-@import './_/x/pass';
-@import './_/x/search';
-@import './_/x/t-o-c';
-@import './_/x/user';
+@include x.alert;
+@include x.comment;
+@include x.markdown;
+@include x.pass;
+@include x.search;
+@include x.t-o-c;
+@include x.user;
