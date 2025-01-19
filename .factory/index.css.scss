@@ -263,6 +263,7 @@ details {
       content: "";
       height: 0;
       left: 0;
+      // See the comment below!
       margin-top: -4px;
       position: absolute;
       top: 50%;
@@ -279,7 +280,12 @@ details {
           right: 4px solid transparent;
           top: 8px solid #70635a;
         }
-        margin-top: -4px;
+        // This comment is to remind me in the future that this number is there on purpose. Logically, I should use
+        // the `-4px` value to center it vertically, but since it is a triangle, I need to move it down a bit to create
+        // an optical illusion that the inverted triangle is centered vertically.
+        //
+        // See <https://medium.com/design-bridges/optical-effects-9fca82b4cd9a>
+        margin-top: -3px;
       }
     }
   }

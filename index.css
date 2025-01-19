@@ -302,7 +302,7 @@ details[open] > summary::before {
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
   border-top: 8px solid #70635a;
-  margin-top: -4px;
+  margin-top: -3px;
 }
 
 fieldset {
