@@ -25,7 +25,8 @@
                     &#x27a0; <?= $title; ?>
                   </a>
                 <?php else: ?>
-                  <a href="<?= eat($page->url); ?>">
+                  <?php $children = $page->children; ?>
+                  <a href="<?= eat($page->url . ($children && $children->count ? '/1' : "")); ?>">
                     <?= $title; ?>
                   </a>
                 <?php endif; ?>
