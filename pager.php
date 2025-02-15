@@ -9,7 +9,8 @@
     </li>
     <li>
       <?php if ($parent = $page->parent): ?>
-        <a href="<?= eat($parent->url); ?>" title="<?= eat($parent->description); ?>">
+        <?php $children = $parent->children ?? false; ?>
+        <a href="<?= eat($parent->url . ($children && $children->count ? '/1' : "")); ?>" title="<?= eat($parent->description); ?>">
           <?= $parent->title ?? i('Parent'); ?>
         </a>
       <?php else: ?>
