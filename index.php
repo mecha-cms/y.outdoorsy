@@ -43,7 +43,7 @@ if (isset($state->x->alert)) {
             if (!$state->is('archives') && !$state->is('tags')) {
                 Alert::info('Showing %s matched with query %s.', ['posts', '<b>' . $search . '</b>']);
             }
-        });
+        }, 100.1);
     }
     Hook::set('route.archive', function ($content, $path, $query, $hash) use ($search, $state) {
         if ($state->is('error')) {
@@ -59,7 +59,7 @@ if (isset($state->x->alert)) {
                 Alert::info('Showing %s published in %s.', ['posts', '<b>' . $archive->i($format) . '</b>']);
             }
         }
-    });
+    }, 100.1);
     Hook::set('route.tag', function ($content, $path, $query, $hash) use ($search, $state) {
         if ($state->is('error')) {
             return;
@@ -75,7 +75,7 @@ if (isset($state->x->alert)) {
                 }
             }
         }
-    });
+    }, 100.1);
     Hook::set('y.alert', function ($alert) {
         foreach ($alert[1] as &$v) {
             $v[2]['aria-live'] = ['error' => 'assertive', 'info' => 'off', 'success' => 'polite'][$v[2]['type'] ?? $v['type']] ?? null;
