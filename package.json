@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "@taufik-nurrohman/factory": "*"
+    "@taufik-nurrohman/factory": "^2.3.1"
   },
   "scripts": {
     "pack": "pack --clean=false --from=.factory --to=."

@@ -116,6 +116,11 @@ li:where(:not(:first-child)) > :where(address,
   margin-top: 15px;
 }
 
+::placeholder {
+  color: inherit;
+  opacity: 0.5;
+}
+
 :root {
   --font-0: Tahoma, Verdana, Geneva, sans-serif;
   --font-1: Georgia, "URW Bookman L", serif;
@@ -762,19 +767,19 @@ textarea {
   justify-content: space-between;
 }
 
-.is\:pages .main > .page > header {
+.is-pages .main > .page > header {
   border-bottom: 1px dashed #e8cba9;
   display: none;
   padding-bottom: 20px;
 }
-.is\:pages.with\:page-header .main > .page > header {
+.is-pages.with-page-header .main > .page > header {
   display: block;
 }
-.is\:pages .page > header {
+.is-pages .page > header {
   background: 0 0;
   padding-bottom: 0;
 }
-.is\:pages .page > header h3 {
+.is-pages .page > header h3 {
   font-size: 150%;
 }
 
