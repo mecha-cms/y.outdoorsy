@@ -815,15 +815,7 @@ textarea {
     > .page {
       > header {
         border-bottom: 1px dashed #e8cba9;
-        display: none;
         padding-bottom: 20px;
-      }
-    }
-  }
-  &.with-page-header {
-    .main {
-      > .page > header {
-        display: block;
       }
     }
   }

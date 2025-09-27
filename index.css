@@ -769,11 +769,7 @@ textarea {
 
 .is-pages .main > .page > header {
   border-bottom: 1px dashed #e8cba9;
-  display: none;
   padding-bottom: 20px;
-}
-.is-pages.with-page-header .main > .page > header {
-  display: block;
 }
 .is-pages .page > header {
   background: 0 0;
