@@ -21,8 +21,7 @@
             <?= $link->title; ?>
           </a>
         <?php else: ?>
-          <?php $children = $link->children; ?>
-          <a href="<?= eat($link->link ?: ($link->url . ($children && $children->count ? '/1' : ""))); ?>">
+          <a href="<?= eat($link->link ?: ($link->url . (q($link->children) ? '/1' : ""))); ?>">
             <?= $link->title; ?>
           </a>
         <?php endif; ?>

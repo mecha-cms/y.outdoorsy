@@ -31,7 +31,7 @@
         </p>
       <?php endif; ?>
     </div>
-    <?php if ($site->has('page') && $site->has('parent')): ?>
+    <?php if ($site->has('parent')): ?>
       <?php if (isset($state->x->comment)): ?>
         <?= self::comments(); ?>
       <?php endif; ?>
