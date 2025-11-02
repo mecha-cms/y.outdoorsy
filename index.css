@@ -749,6 +749,11 @@ textarea {
 .page > header time {
   display: block;
 }
+.page p[role=group] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+}
 .page + .page {
   margin-top: 30px;
 }

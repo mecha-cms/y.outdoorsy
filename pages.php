@@ -40,14 +40,16 @@
             </p>
           </header>
           <div>
-            <?php if (!$excerpt = $page->excerpt): ?>
-              <?php $excerpt = '<p>' . To::description($page->content, 250) . '</p>'; ?>
-            <?php endif; ?>
-            <?= preg_replace('/<a(\s[^>]*?)?>|<\/a>/', "", $excerpt); ?>
-            <p>
+            <?= $page->excerpt ?? '<p>' . To::description($page->description ?? $page->content, 250) . '</p>'; ?>
+            <p role="group">
               <a href="<?= eat($page->url); ?>#next:<?= eat($page->id); ?>">
                 <?= i('Read More'); ?>
               </a>
+              <?php if ($link = $page->link): ?>
+                <a href="<?= eat($link); ?>" rel="nofollow" target="_blank">
+                  <?= i('Visit Link'); ?>
+                </a>
+              <?php endif; ?>
             </p>
           </div>
         </article>

@@ -791,6 +791,13 @@ textarea {
       display: block;
     }
   }
+  p {
+    &[role='group'] {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1em;
+    }
+  }
   + .page {
     margin-top: 30px;
   }
