@@ -55,7 +55,7 @@
         </article>
       <?php endforeach; ?>
     <?php else: ?>
-      <?php if ($site->has('part')): ?>
+      <?php if ($site->has('prev')): ?>
         <p role="status">
           <?= i('No more %s to show.', 'pages'); ?>
         </p>
