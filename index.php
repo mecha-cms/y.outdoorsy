@@ -34,17 +34,14 @@ function page__content($content) {
 
 function route__archive() {
     \extract(\lot());
-    if ($state->is('error')) {
+    if (!$state->has('part') || $state->is('error') || !isset($archive)) {
         return;
     }
-    if (!isset($archive)) {
-        return;
-    }
-    $format = (false === \strpos($state->q->archive ?? "", '-') ? "" : '%B ') . '%Y';
-    if ($q = $state->q->search ?? "") {
-        \Alert::info('Showing %s published in %s and matched with query %s.', ['posts', '<b>' . $archive->i($format) . '</b>', '&#x201c;' . $q . '&#x201d;']);
+    $f = (false === \strpos($state->q('archive.name') ?? "", '-') ? "" : '%B ') . '%Y';
+    if ($q = $state->q('search.query')) {
+        \Alert::info('Showing %s of %s published in %s and matched with query %s.', ['posts', '<b>' . $page->title . '</b>', '<b>' . $archive->i($f) . '</b>', '&#x201c;' . $q . '&#x201d;']);
     } else {
-        \Alert::info('Showing %s published in %s.', ['posts', '<b>' . $archive->i($format) . '</b>']);
+        \Alert::info('Showing %s of %s published in %s.', ['posts', '<b>' . $page->title . '</b>', '<b>' . $archive->i($f) . '</b>']);
     }
 }
 
@@ -53,10 +50,10 @@ function route__author() {
     if (!$state->has('part') || $state->is('error') || !isset($author)) {
         return;
     }
-    if ($q = $state->q->search ?? "") {
+    if ($q = $state->q('search.query')) {
         \Alert::info('Showing all %s written by %s and matched with query %s.', ['posts', '<b>' . $author->title . '</b>', '&#x201c;' . $q . '&#x201d;']);
     } else {
-        if ($q = $state->q->author ?? "") {
+        if ($q = $state->q('author.name')) {
             if ($page instanceof \Author) {
                 \Alert::info('Showing all %s written by %s.', ['posts', '<b>' . $page->title . '</b>']);
             } else {
@@ -74,10 +71,7 @@ function route__author() {
 
 function route__search() {
     \extract(\lot());
-    if ($state->is('error')) {
-        return;
-    }
-    if (!$q = $state->q->search ?? "") {
+    if (!$state->has('part') || $state->is('error') || !($q = $state->q('search.query'))) {
         return;
     }
     if (!$state->is('archives') && !$state->is('authors') && !$state->is('tags')) {
@@ -90,10 +84,10 @@ function route__tag() {
     if (!$state->has('part') || $state->is('error') || !isset($tag)) {
         return;
     }
-    if ($q = $state->q->search ?? "") {
+    if ($q = $state->q('search.query')) {
         \Alert::info('Showing all %s tagged in %s and matched with query %s.', ['posts', '<b>' . $tag->title . '</b>', '&#x201c;' . $q . '&#x201d;']);
     } else {
-        if ($q = $state->q->tag ?? "") {
+        if ($q = $state->q('tag.name')) {
             if ($page instanceof \Tag) {
                 \Alert::info('Showing all %s tagged in %s.', ['posts', '<b>' . $page->title . '</b>']);
             } else {

@@ -258,6 +258,10 @@ details {
     font-family: var(--font-1);
     padding-left: 15px;
     position: relative;
+    &:focus,
+    &:hover {
+      text-decoration: none;
+    }
     &::before {
       border: {
         bottom: 4px solid transparent;
@@ -850,29 +854,28 @@ textarea {
       right: 0;
     }
     a {
-      background: transparent url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAH0lEQVQImWNgQAIFyVH/GXAB0iQLkqP+48IUGItPEgAokBw9wkKFNQAAAABJRU5ErkJggg==') no-repeat 100% 50%;
       color: #70635a;
-      padding: 0 10px 0 0;
-      &:focus,
-      &:hover {
-        background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAH0lEQVQImWNgQAIe0ZL/GXAB0iQ9oiX/48IUGItPEgDgWhaA/pnUkgAAAABJRU5ErkJggg==');
-      }
       &[aria-current] {
         color: #332b25;
-      }
-      [role='status'] {
-        color: #a19386;
-        &::after {
-          content: ')';
-        }
-        &::before {
-          content: '(';
-        }
       }
     }
     li {
       padding: 5px 0;
     }
+  }
+  [role='status'] {
+    color: #a19386;
+  }
+  a:only-child,
+  a + [role='status'] {
+    background: transparent url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAH0lEQVQImWNgQAIFyVH/GXAB0iQLkqP+48IUGItPEgAokBw9wkKFNQAAAABJRU5ErkJggg==') no-repeat 100% 50%;
+    padding: 0 10px 0 0;
+  }
+  a:only-child:focus,
+  a:only-child:hover,
+  a:focus + [role='status'],
+  a:hover + [role='status'] {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAH0lEQVQImWNgQAIe0ZL/GXAB0iQ9oiX/48IUGItPEgDgWhaA/pnUkgAAAABJRU5ErkJggg==');
   }
   [role='tree'] {
     &[open] {
@@ -885,24 +888,9 @@ textarea {
     }
     > summary {
       a {
-        background: transparent url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAH0lEQVQImWNgQAIFyVH/GXAB0iQLkqP+48IUGItPEgAokBw9wkKFNQAAAABJRU5ErkJggg==') no-repeat 100% 50%;
         color: #70635a;
-        padding: 0 10px 0 0;
-        &:focus,
-        &:hover {
-          background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAH0lEQVQImWNgQAIe0ZL/GXAB0iQ9oiX/48IUGItPEgDgWhaA/pnUkgAAAABJRU5ErkJggg==');
-        }
         &[aria-current] {
           color: #332b25;
-        }
-        [role='status'] {
-          color: #a19386;
-          &::after {
-            content: ')';
-          }
-          &::before {
-            content: '(';
-          }
         }
       }
     }

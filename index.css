@@ -286,6 +286,10 @@ details > summary {
   padding-left: 15px;
   position: relative;
 }
+details > summary:focus,
+details > summary:hover {
+  text-decoration: none;
+}
 details > summary::before {
   border-bottom: 4px solid transparent;
   border-left: 8px solid #70635a;
@@ -794,34 +798,34 @@ textarea {
 }
 .widget ul a,
 .widget ul [role=link] {
-  background: transparent url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAH0lEQVQImWNgQAIFyVH/GXAB0iQLkqP+48IUGItPEgAokBw9wkKFNQAAAABJRU5ErkJggg==") no-repeat 100% 50%;
   color: #70635a;
-  padding: 0 10px 0 0;
-}
-.widget ul a:focus,
-.widget ul [role=link]:focus,
-.widget ul a:hover,
-.widget ul [role=link]:hover {
-  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAH0lEQVQImWNgQAIe0ZL/GXAB0iQ9oiX/48IUGItPEgDgWhaA/pnUkgAAAABJRU5ErkJggg==");
 }
 .widget ul a[aria-current],
 .widget ul [aria-current][role=link] {
   color: #332b25;
 }
-.widget ul a [role=status],
-.widget ul [role=link] [role=status] {
-  color: #a19386;
-}
-.widget ul a [role=status]::after,
-.widget ul [role=link] [role=status]::after {
-  content: ")";
-}
-.widget ul a [role=status]::before,
-.widget ul [role=link] [role=status]::before {
-  content: "(";
-}
 .widget ul li {
   padding: 5px 0;
+}
+.widget [role=status] {
+  color: #a19386;
+}
+.widget a:only-child,
+.widget [role=link]:only-child,
+.widget a + [role=status],
+.widget [role=link] + [role=status] {
+  background: transparent url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAH0lEQVQImWNgQAIFyVH/GXAB0iQLkqP+48IUGItPEgAokBw9wkKFNQAAAABJRU5ErkJggg==") no-repeat 100% 50%;
+  padding: 0 10px 0 0;
+}
+.widget a:only-child:focus,
+.widget [role=link]:only-child:focus,
+.widget a:only-child:hover,
+.widget [role=link]:only-child:hover,
+.widget a:focus + [role=status],
+.widget [role=link]:focus + [role=status],
+.widget a:hover + [role=status],
+.widget [role=link]:hover + [role=status] {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAH0lEQVQImWNgQAIe0ZL/GXAB0iQ9oiX/48IUGItPEgDgWhaA/pnUkgAAAABJRU5ErkJggg==");
 }
 .widget [role=tree][open] > summary {
   margin-bottom: 0;
@@ -831,31 +835,11 @@ textarea {
 }
 .widget [role=tree] > summary a,
 .widget [role=tree] > summary [role=link] {
-  background: transparent url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAH0lEQVQImWNgQAIFyVH/GXAB0iQLkqP+48IUGItPEgAokBw9wkKFNQAAAABJRU5ErkJggg==") no-repeat 100% 50%;
   color: #70635a;
-  padding: 0 10px 0 0;
-}
-.widget [role=tree] > summary a:focus,
-.widget [role=tree] > summary [role=link]:focus,
-.widget [role=tree] > summary a:hover,
-.widget [role=tree] > summary [role=link]:hover {
-  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAH0lEQVQImWNgQAIe0ZL/GXAB0iQ9oiX/48IUGItPEgDgWhaA/pnUkgAAAABJRU5ErkJggg==");
 }
 .widget [role=tree] > summary a[aria-current],
 .widget [role=tree] > summary [aria-current][role=link] {
   color: #332b25;
-}
-.widget [role=tree] > summary a [role=status],
-.widget [role=tree] > summary [role=link] [role=status] {
-  color: #a19386;
-}
-.widget [role=tree] > summary a [role=status]::after,
-.widget [role=tree] > summary [role=link] [role=status]::after {
-  content: ")";
-}
-.widget [role=tree] > summary a [role=status]::before,
-.widget [role=tree] > summary [role=link] [role=status]::before {
-  content: "(";
 }
 .widget [role=tree] ul {
   margin: 5px 0 0 15px;

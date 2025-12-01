@@ -2,31 +2,13 @@
 
 $content = "";
 
-if (!isset($current)) {
-    $current = $url->current;
-}
-
-if (!isset($target)) {
-    $target = "";
-}
-
-if (!empty($lot['lot'])) {
-    $content .= '<ul>';
-    foreach ((array) $lot['lot'] as $k => $v) {
-        $content .= '<li>';
-        if (false !== strpos($k, '://')) {
-            $content .= '<a' . ($k === $current ? ' aria-current="page"' : "") . ' href="' . eat($k) . '"' . ($target ? ' target="' . $target . '"' : "") . '>';
-            $content .= $v;
-            $content .= '</a>';
-        } else {
-            $content .= $v;
-        }
-        $content .= '</li>';
+if (!empty($lot['list'])) {
+    foreach ((array) $lot['list'] as $v) {
+        $content .= '<li>' . $v . '</li>';
     }
-    $content .= '</ul>';
 }
 
 echo self::widget([
-    'content' => $content,
+    'content' => $content ? '<ul>' . $content . '</ul>' : "",
     'title' => $title ?? ""
 ]);
