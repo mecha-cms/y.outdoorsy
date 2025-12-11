@@ -7,7 +7,7 @@
           <?= $title; ?>
         </h2>
       <?php endif; ?>
-      <?php if ($site->has('page') && $site->has('parent')): ?>
+      <?php if ($site->has('parent')): ?>
         <p>
           <time datetime="<?= eat($page->time->format('c')); ?>">
             <?= $page->time($state->y->outdoorsy->page->timeFormat ?? '%F %T'); ?>
