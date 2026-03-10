@@ -9,12 +9,12 @@
     </li>
     <li>
       <?php if ($parent = $page->parent): ?>
-        <a href="<?= eat($parent->url . (q($parent->children) ? '/1' : "")); ?>" title="<?= eat($parent->description); ?>">
+        <a href="<?= eat($parent->link . (q($parent->children) ? '/1' : "")); ?>" title="<?= eat(w($parent->description)); ?>">
           <?= $parent->title ?? i('Parent'); ?>
         </a>
       <?php else: ?>
         <?php if (!$site->is('home')): ?>
-          <a href="<?= eat($url); ?>">
+          <a href="<?= eat($link->home); ?>">
             <?= i('Home'); ?>
           </a>
         <?php endif; ?>

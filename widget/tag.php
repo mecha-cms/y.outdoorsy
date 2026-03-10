@@ -2,23 +2,20 @@
 
 if (isset($state->x->tag)) {
     $deep = 0;
-    $folder = LOT . D . 'page' . ($route ?? $state->routeBlog ?? '/article');
-    if ($file = exist([
-        $folder . '.archive',
-        $folder . '.page'
-    ], 1)) {
+    $folder = LOT . D . 'page' . rawurldecode($route ?? $state->routeLog ?? '/article');
+    if ($file = exist(dirname($folder) . D . '{#,}' . basename($folder) . '.{' . ($x = x\page\x()) . '}', 1)) {
         $deep = (new Page($file))->deep ?? 0;
     }
     $a = $list = [];
-    foreach (Pages::from($folder, 'page', $deep) as $v) {
+    foreach (Pages::from($folder, $x, $deep) as $v) {
         $a = array_merge($a, (array) $v->kind);
     }
-    $current = (lot('tag')->url ?? "") . '/';
+    $current = (lot('tag')->link ?? "") . '/';
     foreach (array_count_values($a) as $k => $v) {
         if ($name = To::tag($k)) {
-            if (is_file($f = LOT . D . 'tag' . D . $name . '.page')) {
+            if ($f = exist(LOT . D . 'tag' . D . $name . '.{' . $x . '}', 1)) {
                 $tag = new Tag($f, ['parent' => $file ?: null]);
-                $list[$t = $tag->title] = '<a' . (0 === strpos($current, ($k = $tag->url) . '/') ? ' aria-current="true"' : "") . ' href="' . $k . '" rel="tag">' . $t . '</a> <span aria-label="' . eat(i('%d post' . (1 === $v ? "" : 's'), [$v])) . '" role="status">(' . $v . ')</span>';
+                $list[$t = $tag->title] = '<a' . (0 === strpos($current, ($k = $tag->link) . '/') ? ' aria-current="true"' : "") . ' href="' . $k . '" rel="tag">' . $t . '</a> <span aria-label="' . eat(i('%d post' . (1 === $v ? "" : 's'), [$v])) . '" role="status">(' . $v . ')</span>';
             }
         }
     }

@@ -1,5 +1,5 @@
 <?= self::widget('page', [
+    'limit' => $limit ?? 5,
     'sort' => [-1, 'time'],
-    'take' => $take ?? 5,
     'title' => $title ?? i('Recent %s', ['Posts'])
 ]);

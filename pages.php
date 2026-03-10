@@ -22,12 +22,12 @@
           <header>
             <?php if ($title = $page->title): ?>
               <h3>
-                <?php if ($link = $page->link): ?>
-                  <a href="<?= eat($link); ?>" target="_blank">
+                <?php if ($links = $page->links): ?>
+                  <a href="<?= eat(first($links)); ?>" target="_blank">
                     &#x27a0; <?= $title; ?>
                   </a>
                 <?php else: ?>
-                  <a href="<?= eat($page->url . (q($page->children) ? '/1' : "")); ?>">
+                  <a href="<?= eat($page->link . (q($page->children) ? '/1' : "")); ?>">
                     <?= $title; ?>
                   </a>
                 <?php endif; ?>
@@ -42,11 +42,11 @@
           <div>
             <?= $page->excerpt ?? '<p>' . To::description($page->description ?? $page->content, 250) . '</p>'; ?>
             <p role="group">
-              <a href="<?= eat($page->url); ?>#next:<?= eat($page->id); ?>">
+              <a href="<?= eat($page->link); ?>#next:<?= eat($page->id); ?>">
                 <?= i('Read More'); ?>
               </a>
-              <?php if ($link = $page->link): ?>
-                <a href="<?= eat($link); ?>" rel="nofollow" target="_blank">
+              <?php if ($links = $page->links): ?>
+                <a href="<?= eat(first($links)); ?>" rel="nofollow" target="_blank">
                   <?= i('Visit Link'); ?>
                 </a>
               <?php endif; ?>

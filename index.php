@@ -1,14 +1,12 @@
 <?php namespace y\outdoorsy;
 
-function links(string $folder) {
-    \extract(\lot(), \EXTR_SKIP);
-    $r = [];
-    $route_current = $url->path . '/';
-    $route_index = '/' . \trim($state->route ?? 'index', '/');
-    foreach (\g($folder, 'page') as $k => $v) {
+\lot('links', new \Anemone(\fire(function ($r) use ($state) {
+    $route_current = $this->path . '/';
+    $route_r = '/' . \trim($state->route ?? 'index', '/');
+    foreach (\g(\LOT . \D . 'page', \x\page\x()) as $k => $v) {
         $v = new \Page($k);
         // Exclude home page
-        if ($route_index === ($route = $v->route)) {
+        if ($route_r === ($route = $v->route)) {
             continue;
         }
         // Add current state
@@ -17,9 +15,7 @@ function links(string $folder) {
     }
     \ksort($r);
     return \array_values($r);
-}
-
-\lot('links', new \Anemone(links(\LOT . \D . 'page')));
+}, [[]], $link)));
 
 function page__content($content) {
     if (null === $content) {
@@ -126,9 +122,9 @@ if (isset($state->x->excerpt)) {
 }
 
 $states = [
-    'route-blog' => '/article',
-    'x.comment.page.type' => isset($state->x->comment) ? 'Markdown' : null,
-    'x.page.page.type' => isset($state->x->page) ? 'Markdown' : null
+    'route-log' => '/article',
+    'x.comment.lot.type' => isset($state->x->comment) ? 'Markdown' : null,
+    'x.page.lot.type' => isset($state->x->page) ? 'Markdown' : null
 ];
 
 foreach ($states as $k => $v) {

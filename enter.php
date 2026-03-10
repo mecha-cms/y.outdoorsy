@@ -6,16 +6,12 @@
     <?php if ($v = w($page->description ?? $site->description ?? "")): ?>
       <meta content="<?= $v; ?>" name="description">
     <?php endif; ?>
-    <?php if ('archive' === $page->x): ?>
-      <!-- Prevent search engines from indexing pages with `archive` state -->
-      <meta content="noindex" name="robots">
-    <?php endif; ?>
     <meta content="<?= eat($page->author); ?>" name="author">
     <title>
       <?= w($t->reverse); ?>
     </title>
-    <link href="<?= eat($url . '/favicon.ico'); ?>" rel="icon">
-    <link href="<?= eat($url->current(false, false)); ?>" rel="canonical">
+    <link href="<?= eat($link->base('/favicon.ico')); ?>" rel="icon">
+    <link href="<?= eat($link->current(false, false)); ?>" rel="canonical">
   </head>
   <body>
     <div class="body">

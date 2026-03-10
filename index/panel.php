@@ -54,11 +54,11 @@ Hook::set('_', function ($_) use ($state, $url) {
         $_['lot']['desk']['lot']['form']['lot'][1]['lot']['tabs']['lot']['blog']['lot']['fields']['lot']['route-blog'] = [
             'description' => 'Choose default page for the blog route.',
             'lot' => $lot,
-            'name' => 'state[route-blog]',
+            'name' => 'state[route-log]',
             'stack' => 130,
             'title' => 'Route',
             'type' => 'option',
-            'value' => $state->routeBlog
+            'value' => $state->routeLog
         ];
     }
     return $_;
