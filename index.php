@@ -1,21 +1,69 @@
 <?php namespace y\outdoorsy;
 
-\lot('links', new \Anemone(\fire(function ($r) use ($state) {
-    $route_current = $this->path . '/';
-    $route_r = '/' . \trim($state->route ?? 'index', '/');
-    foreach (\g(\LOT . \D . 'page', \x\page\x()) as $k => $v) {
-        $v = new \Page($k);
-        // Exclude home page
-        if ($route_r === ($route = $v->route)) {
-            continue;
-        }
-        // Add current state
-        $v->current = 0 === \strpos($route_current, $route . '/');
-        $r[$v->title . \P . $k] = $v;
+$data[0] = \Pages::from(\LOT . \D . 'page')->sort([1, 'title'])->not(function ($page) use ($state) {
+    // Skip home page
+    return '/' . \trim($state->route ?? 'index', '/') === $page->route;
+});
+
+$data[1] = new \Pages; // Reserved for bread-crumb
+
+$data[2] = new \Pages;
+
+if (isset($state->x->feed)) {
+    $data[2][] = [
+        'link' => $link->base(($state->routeLog ?? '/article') . '/feed.xml'),
+        'title' => \i('RSS')
+    ];
+}
+
+if (isset($state->x->sitemap)) {
+    $data[2][] = [
+        'link' => $link->base('/sitemap.xml'),
+        'title' => \i('Sitemap')
+    ];
+}
+
+if (isset($state->x->user, $user)) {
+    $route = $state->x->user->route ?? '/user';
+    $route_secret = $state->x->user->guard->route ?? $route;
+    if ($user->exist) {
+        $data[2][] = [
+            'link' => $link->base($route_secret . '/' . $user->name, [
+                'exit' => $user->token,
+                'kick' => $link->path
+            ]),
+            'title' => \i('Exit')
+        ];
+    } else {
+        $data[2][] = [
+            'link' => $link->base($route_secret, [
+                'kick' => $link->path
+            ]),
+            'title' => \i('Enter')
+        ];
     }
-    \ksort($r);
-    return \array_values($r);
-}, [[]], $link)));
+}
+
+// Make sure list is not empty so that the copyright line will not shift up coverring the hard-drawn horizontal rule
+if (0 === $data[2]->count) {
+    $data[2][] = [
+        'link' => $link->home,
+        'title' => \i('Home')
+    ];
+}
+
+$data[2]->sort([1, 'title']);
+
+$data[3] = \Pages::from([
+    ['link' => 'https://facebook.com/ta.tau.taufik', 'title' => 'Facebook'],
+    ['link' => 'https://github.com/taufik-nurrohman', 'title' => 'GitHub'],
+    ['link' => 'https://instagram.com/ta.tau.taufik', 'title' => 'Instagram'],
+    ['link' => 'https://open.spotify.com/user/21ar3ejto7p7p3ybiq5obhrpq', 'title' => 'Spotify'],
+    ['link' => 'https://t.me/taufik_nurrohman', 'title' => 'Telegram'],
+    ['link' => 'https://twitter.com/ta_tau_taufik', 'title' => 'Twitter']
+])->sort([1, 'title']);
+
+\lot('data', $data);
 
 function page__content($content) {
     if (null === $content) {

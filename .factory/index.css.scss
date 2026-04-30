@@ -149,11 +149,7 @@ body {
   font-weight: bold;
 }
 
-%i {
-  font-style: italic;
-}
-
-%input {
+%entry {
   accent-color: #89785f;
   background: #fffdf3;
   border: 1px solid #e8cba9;
@@ -165,6 +161,10 @@ body {
   position: relative;
   vertical-align: middle;
   width: 12rem;
+}
+
+%i {
+  font-style: italic;
 }
 
 %label {
@@ -449,7 +449,7 @@ input,
 output,
 select,
 textarea {
-  @extend %input;
+  @extend %entry;
 }
 
 button {
@@ -471,6 +471,9 @@ input {
   &[type='reset'],
   &[type='submit'] {
     @extend button;
+    &:focus {
+      color: #89785f;
+    }
   }
   &[type='checkbox'],
   &[type='color'],
@@ -671,6 +674,9 @@ textarea {
   margin: 0;
   a {
     color: #3b3125;
+  }
+  h2 {
+    display: none;
   }
   ul {
     display: flex;

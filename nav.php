@@ -14,15 +14,15 @@
         </a>
       <?php endif; ?>
     </li>
-    <?php foreach ($links as $link): ?>
+    <?php foreach ($data[0] as $v): ?>
       <li>
-        <?php if ($link->current): ?>
+        <?php if ($v->current): ?>
           <a aria-current="page">
-            <?= $link->title; ?>
+            <?= $v->title; ?>
           </a>
         <?php else: ?>
-          <a href="<?= eat(first($link->links ?? []) ?? ($link->link . (q($link->children) ? '/1' : ""))); ?>">
-            <?= $link->title; ?>
+          <a href="<?= eat(first($v->links ?? []) ?? ($v->link . (q($v->children) ? '/1' : ""))); ?>">
+            <?= $v->title; ?>
           </a>
         <?php endif; ?>
       </li>

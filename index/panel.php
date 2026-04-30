@@ -5,7 +5,7 @@ if ('POST' === $_SERVER['REQUEST_METHOD'] && '.state' === $_['path'] && empty($_
     $_POST['state']['y']['outdoorsy']['page']['header'] = false;
 }
 
-Hook::set('_', function ($_) use ($state, $url) {
+Hook::set('_', function ($_) use ($link, $state) {
     if ('.state' === $_['path']) {
         $time = new Time;
         $formats = [];
@@ -21,9 +21,9 @@ Hook::set('_', function ($_) use ($state, $url) {
             $formats[$format] = $time($format);
         }
         $lot = [];
-        foreach (Pages::from(LOT . D . 'page', 'archive,page')->sort([1, 'title']) as $v) {
-            $lot[strtr($v->url, [
-                $url . '/' => '/'
+        foreach (Pages::from(LOT . D . 'page', x\page\x())->sort([1, 'title']) as $v) {
+            $lot[strtr($v->link, [
+                $link->base . '/' => '/'
             ])] = $v->title;
         }
         $_['lot']['desk']['lot']['form']['lot'][1]['lot']['tabs']['lot']['blog']['lot']['fields'] = [

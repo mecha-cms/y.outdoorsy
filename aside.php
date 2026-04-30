@@ -8,14 +8,9 @@
     <?= self::widget('page/recent'); ?>
   <?php endif; ?>
   <?= self::widget('list', [
-      'list' => [
-          '<a href="https://facebook.com/ta.tau.taufik" target="_blank">Facebook</a>',
-          '<a href="https://github.com/taufik-nurrohman" target="_blank">GitHub</a>',
-          '<a href="https://instagram.com/ta.tau.taufik" target="_blank">Instagram</a>',
-          '<a href="https://open.spotify.com/user/21ar3ejto7p7p3ybiq5obhrpq" target="_blank">Spotify</a>',
-          '<a href="https://t.me/taufik_nurrohman" target="_blank">Telegram</a>',
-          '<a href="https://twitter.com/ta_tau_taufik" target="_blank">Twitter</a>'
-      ],
+      'list' => $data[3]->map(function ($page) {
+          return '<a href="' . eat($page->link) . '">' . $page->title . '</a>';
+      })->get(),
       'title' => i('Social Links')
   ]); ?>
 </aside>

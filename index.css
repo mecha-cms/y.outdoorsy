@@ -181,12 +181,6 @@ th {
   font-weight: bold;
 }
 
-em,
-i,
-var {
-  font-style: italic;
-}
-
 button,
 [role=button],
 input[type=button],
@@ -207,6 +201,12 @@ textarea {
   position: relative;
   vertical-align: middle;
   width: 12rem;
+}
+
+em,
+i,
+var {
+  font-style: italic;
 }
 
 select,
@@ -466,6 +466,11 @@ input[type=submit] {
   width: auto;
 }
 
+input[type=button]:focus,
+input[type=reset]:focus,
+input[type=submit]:focus {
+  color: #89785f;
+}
 input[type=checkbox],
 input[type=color],
 input[type=file],
@@ -626,6 +631,9 @@ textarea {
 .foot a,
 .foot [role=link] {
   color: #3b3125;
+}
+.foot h2 {
+  display: none;
 }
 .foot ul {
   display: flex;
