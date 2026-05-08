@@ -499,16 +499,17 @@ input {
   }
   &[type='checkbox'],
   &[type='radio'] {
+    -moz-appearance: none;
     -webkit-appearance: none;
     appearance: none;
     background: #e8cba9;
     border-radius: 3px;
-    height: 1.1em;
-    max-height: 1.1em;
-    max-width: 1.1em;
-    min-height: 1.1em;
-    min-width: 1.1em;
-    width: 1.1em;
+    height: 1.25em;
+    max-height: 1.25em;
+    max-width: 1.25em;
+    min-height: 1.25em;
+    min-width: 1.25em;
+    width: 1.25em;
   }
   &[type='checkbox'] {
     &:checked {
@@ -520,9 +521,9 @@ input {
         }
         content: "";
         height: 0.3em;
-        left: 0.3em;
+        left: 0.4em;
         position: absolute;
-        top: 0.28em;
+        top: 0.4em;
         transform: rotate(-45deg);
         width: 0.5em;
       }
@@ -530,12 +531,13 @@ input {
   }
   &[type='number'] {
     -moz-appearance: textfield;
+    -webkit-appearance: textfield;
     appearance: textfield;
   }
   &[type='radio'] {
     border-radius: 100%;
     &:checked {
-      background: 0 0;
+      background: none;
       border: 0.25em solid #89785f;
     }
   }
@@ -556,6 +558,9 @@ textarea {
 
 select {
   @extend %label;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 table {
