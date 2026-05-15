@@ -1,7 +1,7 @@
 <?php
 
 $deep = 0;
-$folder = LOT . D . 'page' . rawurldecode($route ?? $state->routeLog ?? '/article');
+$folder = LOT . D . 'page' . rawurldecode($sub ?? $state->subLog ?? '/article');
 if ($file = exist(dirname($folder) . D . '{#,}' . basename($folder) . '.{' . ($x = x\page\x()) . '}', 1)) {
     $deep = (new Page($file))->deep ?? 0;
 }

@@ -2,7 +2,7 @@
 
 $data[0] = \Pages::from(\LOT . \D . 'page')->sort([1, 'title'])->not(function ($page) use ($state) {
     // Skip home page
-    return '/' . \trim($state->route ?? 'index', '/') === $page->route;
+    return '/' . \trim($state->home ?? 'index', '/') === $page->route;
 });
 
 $data[1] = new \Pages; // Reserved for bread-crumb
@@ -11,7 +11,7 @@ $data[2] = new \Pages;
 
 if (isset($state->x->feed)) {
     $data[2][] = [
-        'link' => $link->base(($state->routeLog ?? '/article') . '/feed.xml'),
+        'link' => $link->base(($state->subLog ?? '/article') . '/feed.xml'),
         'title' => \i('RSS')
     ];
 }
@@ -24,11 +24,11 @@ if (isset($state->x->sitemap)) {
 }
 
 if (isset($state->x->user, $user)) {
-    $route = $state->x->user->route ?? '/user';
-    $route_secret = $state->x->user->guard->route ?? $route;
+    $sub = $state->x->user->sub ?? '/user';
+    $sub_x = $state->x->user->guard->sub ?? $sub;
     if ($user->exist) {
         $data[2][] = [
-            'link' => $link->base($route_secret . '/' . $user->name, [
+            'link' => $link->base($sub_x . '/' . $user->name, [
                 'exit' => $user->token,
                 'kick' => $link->path
             ]),
@@ -36,7 +36,7 @@ if (isset($state->x->user, $user)) {
         ];
     } else {
         $data[2][] = [
-            'link' => $link->base($route_secret, [
+            'link' => $link->base($sub_x, [
                 'kick' => $link->path
             ]),
             'title' => \i('Enter')
@@ -170,7 +170,7 @@ if (isset($state->x->excerpt)) {
 }
 
 $states = [
-    'route-log' => '/article',
+    'sub-log' => '/article',
     'x.comment.lot.type' => isset($state->x->comment) ? 'Markdown' : null,
     'x.page.lot.type' => isset($state->x->page) ? 'Markdown' : null
 ];

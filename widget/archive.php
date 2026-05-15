@@ -5,9 +5,9 @@ $content = "";
 if (isset($state->x->archive)) {
     $archives = [];
     $deep = 0;
-    $route_archive = $state->x->archive->route ?? '/archive';
-    $route_log = $route ?? $state->routeLog ?? '/article';
-    $folder = LOT . D . 'page' . rawurldecode($route_log);
+    $sub_archive = $state->x->archive->sub ?? '/archive';
+    $sub_log = $sub ?? $state->subLog ?? '/article';
+    $folder = LOT . D . 'page' . rawurldecode($sub_log);
     if ($file = exist(dirname($folder) . D . '{#,}' . basename($folder) . '.{' . ($x = x\page\x()) . '}', 1)) {
         $deep = (new Page($file))->deep ?? 0;
     }
@@ -30,7 +30,7 @@ if (isset($state->x->archive)) {
         }
         $content .= '<details' . (($open = $k === explode('-', $current)[0]) ? ' open' : "") . ' role="tree">';
         $content .= '<summary aria-level="1" role="treeitem">';
-        $content .= '<a' . ($open ? ' aria-current="page"' : "") . ' href="' . eat(long($route_log . $route_archive . '/' . $k . '/1')) . '">' . $k . '</a>';
+        $content .= '<a' . ($open ? ' aria-current="page"' : "") . ' href="' . eat(long($sub_log . $sub_archive . '/' . $k . '/1')) . '">' . $k . '</a>';
         $content .= ' <span aria-label="' . eat(i('%d archive' . (1 === ($i = count($v)) ? "" : 's'), [$i])) . '" role="status">(' . $i . ')</span>';
         $content .= '</summary>';
         if (is_array($v)) {
@@ -38,7 +38,7 @@ if (isset($state->x->archive)) {
             $content .= '<ul role="group">';
             foreach ($v as $kk => $vv) {
                 $content .= '<li aria-level="2" role="treeitem">';
-                $content .= '<a' . ($k . '-' . $kk === $current ? ' aria-current="page"' : "") . ' href="' . eat(long($route_log . $route_archive . '/' . $k . '-' . $kk . '/1')) . '">' . $k . ' ' . i(date('F', mktime(0, 0, 0, $kk, 1))) . '</a>';
+                $content .= '<a' . ($k . '-' . $kk === $current ? ' aria-current="page"' : "") . ' href="' . eat(long($sub_log . $sub_archive . '/' . $k . '-' . $kk . '/1')) . '">' . $k . ' ' . i(date('F', mktime(0, 0, 0, $kk, 1))) . '</a>';
                 $content .= ' <span aria-label="' . eat(i('%d post' . (1 === ($ii = count($vv)) ? "" : 's'), [$ii])) . '" role="status">(' . $ii . ')</span>';
                 $content .= '</li>';
             }
