@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html class>
+  <head>
+    <meta charset="utf-8">
+    <meta content="width=1024" name="viewport">
+    <?php if ($s = w($page->description ?? $site->description ?? "")): ?>
+      <meta content="<?= $s; ?>" name="description">
+    <?php endif; ?>
+    <meta content="<?= eat($page->author); ?>" name="author">
+    <title>
+      <?= w($t->reverse); ?>
+    </title>
+    <link href="<?= eat($link->base('/favicon.ico')); ?>" rel="icon">
+    <link href="<?= eat($link->current(false, false)); ?>" rel="canonical">
+  </head>
+  <body>
+    <div class="body">
+      <header class="header">
+        <h1>
+          <?php if ($site->is('home')): ?>
+            <a aria-current="page">
+              <?= $site->title; ?>
+            </a>
+          <?php else: ?>
+            <a href="<?= eat($link->home); ?>">
+              <?= $site->title; ?>
+            </a>
+          <?php endif; ?>
+        </h1>
+        <p>
+          <?= $site->description; ?>
+        </p>
+      </header>
+      <h2>
+        <?= i('Navigation'); ?>
+      </h2>
+      <nav class="nav">
+        <ul>
+          <li>
+            <?php if ($site->is('home')): ?>
+              <a aria-current="page">
+                <?= i('Home'); ?>
+              </a>
+            <?php else: ?>
+              <a href="<?= eat($link->home); ?>">
+                <?= i('Home'); ?>
+              </a>
+            <?php endif; ?>
+          </li>
+          <?php foreach ($data[0] as $o): ?>
+            <li>
+              <?php if ($o->current): ?>
+                <a aria-current="page">
+                  <?= $o->title; ?>
+                </a>
+              <?php else: ?>
+                <a href="<?= eat(first($o->links ?? []) ?? ($o->link . (q($o->children) ? '/1' : ""))); ?>">
+                  <?= $o->title; ?>
+                </a>
+              <?php endif; ?>
+            </li>
+          <?php endforeach; ?>
+        </ul>
+      </nav>
+      <div class="content">
+        <main class="main">
+          <?= self::alert(); ?>
+          <?php if ($site->is('page')): ?>
+            <?php if ($page->exist): ?>
+              <article class="page" id="page:<?= eat($page->id); ?>">
+                <header>
+                  <?php if ($s = $page->title): ?>
+                    <h2>
+                      <?= $s; ?>
+                    </h2>
+                  <?php endif; ?>
+                  <?php if ($site->has('parent')): ?>
+                    <p>
+                      <time datetime="<?= eat($page->time->format('c')); ?>">
+                        <?= $page->time($state->y->outdoorsy->page->time->format ?? '%F %T'); ?>
+                      </time>
+                    </p>
+                  <?php endif; ?>
+                </header>
+                <div>
+                  <?php if ($s = $page->content): ?>
+                    <?= $s; ?>
+                  <?php else: ?>
+                    <p role="status">
+                      <?= i('No %s.', 'content'); ?>
+                    </p>
+                  <?php endif; ?>
+                  <?php if ($s = first($page->links ?? [])): ?>
+                    <p role="group">
+                      <a href="<?= eat($s); ?>" rel="nofollow" role="button" target="_blank">
+                        <?= i('Visit Link'); ?>
+                      </a>
+                    </p>
+                  <?php endif; ?>
+                </div>
+                <?php if ($site->has('parent')): ?>
+                  <?php if (isset($state->x->comment)): ?>
+                    <?= self::comments(); ?>
+                  <?php endif; ?>
+                <?php endif; ?>
+              </article>
+            <?php else: ?>
+              <article class="page">
+                <header>
+                  <h2>
+                    <?= i('Error'); ?>
+                  </h2>
+                </header>
+                <div>
+                  <p role="status">
+                    <?= i('%s does not exist.', 'Page'); ?>
+                  </p>
+                </div>
+              </article>
+            <?php endif; ?>
+          <?php elseif ($site->is('pages')): ?>
+            <?php if ($page->exist): ?>
+              <article class="page" id="page:<?= eat($page->id); ?>">
+                <?php if (!empty($state->y->outdoorsy->page->header)): ?>
+                  <header>
+                    <?php if ($s = $page->title): ?>
+                      <h2>
+                        <?= $s; ?>
+                      </h2>
+                    <?php endif; ?>
+                    <?php if ($s = $page->description): ?>
+                      <p>
+                        <?= $s; ?>
+                      </p>
+                    <?php endif; ?>
+                  </header>
+                <?php endif; ?>
+                <?php $excerpt_format = $state->y->outdoorsy->page->excerpt ?? 250; ?>
+                <?php $time_format = $state->y->outdoorsy->page->time->format ?? '%F %T'; ?>
+                <?php if ($pages->count): ?>
+                  <?php foreach ($pages as $page): ?>
+                    <article class="page" id="page:<?= eat($page->id); ?>">
+                      <header>
+                        <?php if ($s = $page->title): ?>
+                          <h3>
+                            <?php if ($ss = first($page->links ?? [])): ?>
+                              <a href="<?= eat($ss); ?>" target="_blank">
+                                &#x27a0; <?= $s; ?>
+                              </a>
+                            <?php else: ?>
+                              <a href="<?= eat($page->link . (q($page->children) ? '/1' : "")); ?>">
+                                <?= $s; ?>
+                              </a>
+                            <?php endif; ?>
+                          </h3>
+                        <?php endif; ?>
+                        <p>
+                          <time datetime="<?= eat($page->time->format('c')); ?>">
+                            <?= $page->time($time_format); ?>
+                          </time>
+                        </p>
+                      </header>
+                      <div>
+                        <?= $page->excerpt ?? '<p>' . To::description($page->description ?? $page->content, $excerpt_format) . '</p>'; ?>
+                        <p role="group">
+                          <a href="<?= eat($page->link); ?>#next:<?= eat($page->id); ?>">
+                            <?= i('Read More'); ?>
+                          </a>
+                          <?php if ($s = first($page->links ?? [])): ?>
+                            <a href="<?= eat($s); ?>" rel="nofollow" target="_blank">
+                              <?= i('Visit Link'); ?>
+                            </a>
+                          <?php endif; ?>
+                        </p>
+                      </div>
+                    </article>
+                  <?php endforeach; ?>
+                <?php else: ?>
+                  <p role="status">
+                    <?= i('No %s to show.', 'pages'); ?>
+                  </p>
+                <?php endif; ?>
+                <nav class="pager">
+                  <ul>
+                    <li>
+                      <?php if ($o = $pager->prev): ?>
+                        <a href="<?= eat($o->link); ?>" rel="prev" title="<?= eat($o->description); ?>">
+                          <?= i('Newer %s', 'Posts'); ?>
+                        </a>
+                      <?php endif; ?>
+                    </li>
+                    <li>
+                      <?php if ($o = $page->parent): ?>
+                        <a href="<?= eat($o->link . (q($o->children) && $site->has('prev') ? '/1' : "")); ?>" title="<?= eat(w($o->description)); ?>">
+                          <?= $o->title ?? i('Parent'); ?>
+                        </a>
+                      <?php else: ?>
+                        <?php if (!$site->is('home')): ?>
+                          <a href="<?= eat($link->home); ?>">
+                            <?= i('Home'); ?>
+                          </a>
+                        <?php endif; ?>
+                      <?php endif; ?>
+                    </li>
+                    <li>
+                      <?php if ($o = $pager->next): ?>
+                        <a href="<?= eat($o->link); ?>" rel="next" title="<?= eat($o->description); ?>">
+                          <?= i('Older %s', 'Posts'); ?>
+                        </a>
+                      <?php endif; ?>
+                    </li>
+                  </ul>
+                </nav>
+              </article>
+            <?php else: ?>
+              <p role="status">
+                <?= i('No %s to show.', 'pages'); ?>
+              </p>
+            <?php endif; ?>
+          <?php endif; ?>
+        </main>
+        <?= self::part('aside'); ?>
+      </div>
+      <footer class="footer">
+        <div class="function">
+          <!-- You have to maintain this back link to support the theme designer, or visit this back link to find a legal way to remove it via the theme designer’s discretion. -->
+          <?= i('Designed by %s', ['<a href="http://www.themespreview.com" rel="nofollow" target="_blank">Function</a>']); ?>
+        </div>
+        <div class="foot">
+          <?php if (q($data[2])): ?>
+            <h2>
+              <?= i('Links'); ?>
+            </h2>
+            <ul>
+              <?php foreach ($data[2] as $o): ?>
+                <li>
+                  <a href="<?= eat($o->link); ?>">
+                    <?= $o->title; ?>
+                  </a>
+                </li>
+              <?php endforeach; ?>
+            </ul>
+          <?php endif; ?>
+          <span class="rights">
+            &#x00a9; <?= $date->year; ?> <a href="<?= eat($link->home); ?>">
+              <?= $site->title; ?>
+            </a> <span>
+              <!-- You have to maintain this back link to support me, or make a proper donation to remove it. -->
+              <?= i('Powered by %s', ['<a href="https://mecha-cms.com" rel="nofollow" target="_blank">Mecha ' . VERSION . '</a>']); ?>
+            </span>
+          </span>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
